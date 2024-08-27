@@ -4,3 +4,30 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 #}
 
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+  {# Set serviceName in config.js. #}
+  {{ govukHeader({
+    homepageUrl: "/",
+    serviceName: serviceName,
+    serviceUrl: "/" + folder + "/",
+    containerClasses: "govuk-width-container"
+  }) }}
+
+  <div class="govuk-width-container">
+  <div class="govuk-phase-banner">
+    <p class="govuk-phase-banner__content">
+      <strong class="govuk-tag govuk-tag--red govuk-phase-banner__content__tag">
+      Prototype
+      </strong>
+      <span>This is not a live service. This is not production ready code.</span>
+    </p>
+  </div>
+
+  {% block globalnav %}
+  {% endblock %}
+  {% block keydetails %}
+  {% endblock %}
+  </div>
+
+{% endblock %}
