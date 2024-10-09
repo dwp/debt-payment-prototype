@@ -42,16 +42,23 @@ router.post('/country-answer', function(request, response) {
 })
 
 router.get('/filter', function(request, response) {
-  view = {
-    count: 10,
+  const customers = request.session.data['customers']
+  const results = transform(customers)
+  const view = {
+    count: customers.length,
+    results,
     types: getTypes()
   }
   response.render('/filter', view)
 })
 
 router.post('/filter', function(request, response) {
-  view = {
+  const customers = request.session.data['customers']
+  const results = transform(customers)
+  const body = request.body
+  const view = {
     count: 10,
+    results,
     firstName: body.firstName,
     types: getTypes(body.types),
     status: body.status
@@ -62,7 +69,7 @@ router.post('/filter', function(request, response) {
 const types = ['Blue', 'Yellow', 'Red']
 const getTypes = (results=[]) => {
   let items = []
-  types.forEach((item, index) => {
+  types.forEach((item) => {
     const checked= results.includes(item)
     items.push({
       value: item,
@@ -71,5 +78,19 @@ const getTypes = (results=[]) => {
     })
   })
   return items
+}
+const transform = (customers) => {
+  let results = []
+  customers.forEach(customer => {
+    results.push({
+      name: customer.firstName + ' ' + customer.surname,
+      niNumber: customer.niNumber,
+      postcode:customer.postcode,
+      benefitTypeId:customer.benefitTypeId,
+      indNumber:customer.indNumber,
+      indDebtBalance:customer.indDebtBalance
+    })
+  })
+  return results
 }
   // Add your routes here
