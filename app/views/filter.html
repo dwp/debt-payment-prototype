@@ -1,0 +1,154 @@
+{%- from "moj/components/filter/macro.njk" import mojFilter -%}
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <form class="form" action="/filter" method="post">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+        {%- set filterOptionsHtml %}
+
+          {{ govukInput({
+            id: 'first-name',
+            name: 'firstName',
+            label: {
+              text: 'First name',
+              classes: 'govuk-label--m'
+            },
+            value: firstName
+          }) }}
+
+          {{ govukCheckboxes({
+            idPrefix: 'types',
+            name: 'types',
+            classes: "govuk-checkboxes--small",
+            fieldset: {
+              legend: {
+                text: 'Type',
+                classes: 'govuk-fieldset__legend--m'
+              }
+            },
+            items: types
+          }) }}
+
+          {{ govukCheckboxes({
+            idPrefix: 'status',
+            name: 'status',
+            classes: "govuk-checkboxes--small",
+            fieldset: {
+              legend: {
+                text: 'Status',
+                classes: 'govuk-fieldset__legend--m'
+              }
+            },
+            items: [
+              {
+                value: 'complete',
+                text: 'Completed (2)',
+                checked: true
+              },
+              {
+                value: 'incomplete',
+                text: 'Incomplete (5)'
+              },
+              {
+                value: 'inprogress',
+                text: 'In progress (3)',
+                checked: false
+              }
+            ]
+          }) }}
+        {% endset -%}
+
+        {{ mojFilter({
+          heading: {
+            text: 'Filter'
+          },
+
+          submit: {
+            attributes: {
+              "data-test-id": "submit-button"
+            }
+          },
+
+          selectedFilters: {
+
+            heading: {
+              text: 'Selected filters'
+            },
+
+            clearLink: {
+              text: 'Clear filters',
+              href: '/filter'
+            },
+
+            categories: [
+              {
+                heading: {
+                text: 'Type'
+              },
+                items: [{
+                href: '/path/to/remove/this',
+                text: 'Blue'
+              }, {
+                href: '/path/to/remove/this',
+                text: 'Yellow'
+              }]
+              },
+              {
+                heading: {
+                text: 'Status'
+              },
+                items: [{
+                href: '/path/to/remove/this',
+                text: 'Completed'
+              }]
+              }
+            ]
+          },
+          optionsHtml: filterOptionsHtml
+        }) }}
+      </div>
+      <div class="govuk-grid-column-two-thirds">
+
+        <h3 class="govuk-heading-s">
+          {{ count }} results
+        </h3>
+
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+
+
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">id</th>
+            <th scope="col" class="govuk-table__header">name</th>
+            <th scope="col" class="govuk-table__header">technology</th>
+          </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+          {% for item in recordset %}
+            <tr class="govuk-table__row">
+              <th scope="row" class="govuk-table__header">{{ item.id }}</th>
+              <td class="govuk-table__cell">{{ item.name }}</td>
+              <td class="govuk-table__cell">{{ item.tech }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </form>
+
+{% endblock %}
