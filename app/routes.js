@@ -49,11 +49,12 @@ router.post('/country-answer', function(request, response) {
 
 router.get('/filter', function(request, response) {
   const customers = request.session.data['customers']
-  const query = request.query
   // const url = buildUrlWithQueries('/filter', request.query)
+  const query = request.query
+  const filteredCustomers = filterCustomer(query, customers)
   const view = {
-    count: customers.length,
-    results: transform(customers),
+    count: filteredCustomers.length,
+    results: transform(filteredCustomers),
     firstName: query.firstName,
     firstNameFilter: query.firstName !== undefined ? getSingleFilterItem(query.firstName): [],
     surname: query.surname,
@@ -65,6 +66,23 @@ router.get('/filter', function(request, response) {
   }
   response.render('/filter', view)
 })
+
+const filterCustomer = (query, customers) => {
+  let filteredCustomers= customers
+  if (query.firstName) {
+    filteredCustomers = filteredCustomers.filter(customer => customer.firstName.includes(query.firstName))
+  }
+  if (query.surname) {
+    filteredCustomers = filteredCustomers.filter(customer => customer.surname.includes(query.surname))
+  }
+  if (query.postcode) {
+    filteredCustomers = filteredCustomers.filter(customer => customer.postcode.includes(query.postcode))
+  }
+  if (query.benefitTypeId) {
+    filteredCustomers = filteredCustomers.filter(customer => customer.benefitTypeId.includes(query.benefitTypeId))
+  }
+  return filteredCustomers
+}
 
 router.post('/filter', function(request, response) {
   const body = request.body
