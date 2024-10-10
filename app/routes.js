@@ -6,6 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
+const benefitTypeIdOptions = ['TCOP', 'UCOP', 'UCNCA', 'UCBA']
 
 // Logging session data
 // This code shows in the terminal what session data has been saved.
@@ -49,13 +50,18 @@ router.post('/country-answer', function(request, response) {
 router.get('/filter', function(request, response) {
   const customers = request.session.data['customers']
   const query = request.query
-  const url = buildUrlWithQueries('/filter', request.query)
+  // const url = buildUrlWithQueries('/filter', request.query)
   const view = {
     count: customers.length,
     results: transform(customers),
     firstName: query.firstName,
-    types: query.types !== undefined ? getTypes(query.types.split(',')) : getTypes([]),
-    typeFilterItems: query.types !== undefined? getTypeFilterItems(query.types.split(',')) : getTypeFilterItems([]),
+    firstNameFilter: query.firstName !== undefined ? getSingleFilterItem(query.firstName): [],
+    surname: query.surname,
+    surnameFilter: query.surname !== undefined ? getSingleFilterItem(query.surname): [],
+    postcode: query.postcode,
+    postcodeFilter: query.postcode !== undefined ? getSingleFilterItem(query.postcode): [],
+    benefitTypeId: query.benefitTypeId !== undefined ? getBenefitTypeIds(query.benefitTypeId.split(',')) : getBenefitTypeIds([]),
+    benefitTypeIdFilterItems: query.benefitTypeId !== undefined? getManyFilterItems(query.benefitTypeId.split(',')) : getManyFilterItems([]),
   }
   response.render('/filter', view)
 })
@@ -66,9 +72,11 @@ router.post('/filter', function(request, response) {
 })
 const buildUrlWithQueries = (path, body) => {
   const firstName = body.firstName !== '' ? 'firstName=' + body.firstName + '&' : ''
-  const normaliseTypes = normaliseCheckBoxes(body.types)
-  const types= normaliseTypes !== '' ? 'types=' + normaliseTypes + '&' : ''
-  return (path + '?' + firstName + types).replace(/&([^&]*)$/, '$1')
+  const surname = body.surname !== '' ? 'surname=' + body.surname + '&' : ''
+  const postcode = body.postcode !== '' ? 'postcode=' + body.postcode + '&' : ''
+  const normaliseBenefitTypeId = normaliseCheckBoxes(body.benefitTypeId)
+  const benefitTypeId= normaliseBenefitTypeId !== '' ? 'benefitTypeId=' + normaliseBenefitTypeId + '&' : ''
+  return (path + '?' + firstName + surname + postcode + benefitTypeId).replace(/&([^&]*)$/, '$1')
 }
 const normaliseCheckBoxes = (types) => {
   if (!Array.isArray(types)) {
@@ -77,7 +85,7 @@ const normaliseCheckBoxes = (types) => {
   return types.filter(type => type !== '_unchecked').join(',')
 }
 
-const getTypeFilterItems = (types=[]) => {
+const getManyFilterItems = (types=[]) => {
   let items=[]
   types.forEach(type => {
     items.push({
@@ -88,11 +96,17 @@ const getTypeFilterItems = (types=[]) => {
   })
   return items
 }
+const getSingleFilterItem = (text) => {
+  return [{
+      // TODO - this needs fixing
+      href: '/path/to/remove/this',
+      text: text
+    }]
+}
 
-const options = ['Blue', 'Yellow', 'Red']
-const getTypes = (types=[]) => {
+const getBenefitTypeIds = (types=[]) => {
   let items = []
-  options.forEach(item => {
+  benefitTypeIdOptions.forEach(item => {
     const checked= types.includes(item)
     items.push({
       value: item,

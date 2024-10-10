@@ -19,6 +19,7 @@
       <div class="govuk-grid-column-one-third">
         {%- set filterOptionsHtml %}
 
+          {#  First name        #}
           {{ govukInput({
             id: 'first-name',
             name: 'firstName',
@@ -28,18 +29,79 @@
             },
             value: firstName
           }) }}
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
+          {#  Last name        #}
+          {{ govukInput({
+            id: 'surname',
+            name: 'surname',
+            label: {
+              text: 'Last name',
+              classes: 'govuk-label--m'
+            },
+            value: surname
+          }) }}
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+          {#  Postcode        #}
+          {{ govukInput({
+            id: 'postcode',
+            name: 'postcode',
+            label: {
+              text: 'Postcode',
+              classes: 'govuk-label--m'
+            },
+            value: postcode
+          }) }}
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+          {#  IND number        #}
+          {{ govukInput({
+            id: 'ind-number',
+            name: 'indNumber',
+            label: {
+              text: 'IND number',
+              classes: 'govuk-label--m'
+            },
+            value: indNumber
+          }) }}
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+          {#  ...        #}
           {{ govukCheckboxes({
-            idPrefix: 'types',
-            name: 'types',
+            idPrefix: 'benefit-type-id',
+            name: 'benefitTypeId',
             classes: "govuk-checkboxes--small",
             fieldset: {
               legend: {
-                text: 'Type',
+                text: 'Benefit type ID',
                 classes: 'govuk-fieldset__legend--m'
               }
             },
-            items: types
+            items: benefitTypeId
+          }) }}
+
+          {#  IND debt balance        #}
+          {{ govukInput({
+            id: 'ind-number',
+            name: 'indNumber',
+            label: {
+              text: 'IND debt balance',
+              classes: 'govuk-label--m'
+            },
+            value: indNumber
+          }) }}
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+          {#  National Insurance number        #}
+          {{ govukInput({
+            id: 'ni-number',
+            name: 'niNumber',
+            label: {
+              text: 'National Insurance number',
+              classes: 'govuk-label--m'
+            },
+            value: niNumber
           }) }}
 
         {% endset -%}
@@ -48,13 +110,11 @@
           heading: {
             text: 'Filter'
           },
-
           submit: {
             attributes: {
               "data-test-id": "submit-button"
             }
           },
-
           selectedFilters: {
             heading: {
               text: 'Selected filters'
@@ -66,9 +126,27 @@
             categories: [
               {
                 heading: {
-                text: 'Type'
+                text: 'First name'
               },
-                items: typeFilterItems
+                items: firstNameFilter
+              },
+              {
+                heading: {
+                text: 'Last name'
+              },
+                items: surnameFilter
+              },
+              {
+                heading: {
+                text: 'Postcode'
+              },
+                items: postcodeFilter
+              },
+              {
+                heading: {
+                text: 'Benefit type ID'
+              },
+                items: benefitTypeIdFilterItems
               }
             ]
           },
