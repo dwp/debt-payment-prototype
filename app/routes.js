@@ -116,7 +116,6 @@ const getManyFilterItems = (types=[]) => {
 }
 const getSingleFilterItem = (text) => {
   return [{
-      // TODO - this needs fixing
       href: '/path/to/remove/this',
       text: text
     }]
