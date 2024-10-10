@@ -56,18 +56,18 @@
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
           {#  IND number        #}
-          {{ govukInput({
-            id: 'ind-number',
-            name: 'indNumber',
-            label: {
-              text: 'IND number',
-              classes: 'govuk-label--m'
-            },
-            value: indNumber
-          }) }}
-          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+{#          {{ govukInput({#}
+{#            id: 'ind-number',#}
+{#            name: 'indNumber',#}
+{#            label: {#}
+{#              text: 'IND number',#}
+{#              classes: 'govuk-label--m'#}
+{#            },#}
+{#            value: indNumber#}
+{#          }) }}#}
+{#          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">#}
 
-          {#  ...        #}
+          {#  Benefit type ID        #}
           {{ govukCheckboxes({
             idPrefix: 'benefit-type-id',
             name: 'benefitTypeId',
@@ -81,28 +81,28 @@
             items: benefitTypeId
           }) }}
 
-          {#  IND debt balance        #}
-          {{ govukInput({
-            id: 'ind-number',
-            name: 'indNumber',
-            label: {
-              text: 'IND debt balance',
-              classes: 'govuk-label--m'
-            },
-            value: indNumber
-          }) }}
-          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+{#          #}{#  IND debt balance        #}
+{#          {{ govukInput({#}
+{#            id: 'ind-number',#}
+{#            name: 'indNumber',#}
+{#            label: {#}
+{#              text: 'IND debt balance',#}
+{#              classes: 'govuk-label--m'#}
+{#            },#}
+{#            value: indNumber#}
+{#          }) }}#}
+{#          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">#}
 
-          {#  National Insurance number        #}
-          {{ govukInput({
-            id: 'ni-number',
-            name: 'niNumber',
-            label: {
-              text: 'National Insurance number',
-              classes: 'govuk-label--m'
-            },
-            value: niNumber
-          }) }}
+{#          #}{#  National Insurance number        #}
+{#          {{ govukInput({#}
+{#            id: 'ni-number',#}
+{#            name: 'niNumber',#}
+{#            label: {#}
+{#              text: 'National Insurance number',#}
+{#              classes: 'govuk-label--m'#}
+{#            },#}
+{#            value: niNumber#}
+{#          }) }}#}
 
         {% endset -%}
 
