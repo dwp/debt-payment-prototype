@@ -43,34 +43,53 @@ router.post('/country-answer', function(request, response) {
 
 router.get('/filter', function(request, response) {
   const customers = request.session.data['customers']
-  const results = transform(customers)
+  const query = request.query
   const view = {
     count: customers.length,
-    results,
-    types: getTypes()
+    results: transform(customers),
+    firstName: query.firstName,
+    types: query.types !== undefined ? getTypes(query.types.split(',')) : getTypes([])
   }
   response.render('/filter', view)
 })
 
 router.post('/filter', function(request, response) {
-  const customers = request.session.data['customers']
-  const results = transform(customers)
   const body = request.body
-  const view = {
-    count: 10,
-    results,
-    firstName: body.firstName,
-    types: getTypes(body.types),
-    status: body.status
-  }
-  response.render('/filter', view)
+  response.redirect(buildUrlWithQueries('/filter', body))
 })
+const buildUrlWithQueries = (path, body) => {
+  const firstName = body.firstName !== '' ? 'firstName=' + body.firstName + '&' : ''
+  const normaliseTypes = normaliseCheckBoxes(body.types)
+  const types= normaliseTypes !== '' ? 'types=' + normaliseTypes + '&' : ''
+  return path + '?' + firstName + types
+}
+const normaliseCheckBoxes = (types) => {
+  if (!Array.isArray(types)) {
+    return ''
+  }
+  return types.filter(type => type !== '_unchecked').join(',')
+}
+// categories: [
+//   {
+//     heading: {
+//       text: 'Type'
+//     },
+//     items: [{
+//       href: '/path/to/remove/this',
+//       text: 'Blue'
+//     }, {
+//       href: '/path/to/remove/this',
+//       text: 'Yellow'
+//     }]
+//   }
+// ]
 
-const types = ['Blue', 'Yellow', 'Red']
-const getTypes = (results=[]) => {
+
+const options = ['Blue', 'Yellow', 'Red']
+const getTypes = (types=[]) => {
   let items = []
-  types.forEach((item) => {
-    const checked= results.includes(item)
+  options.forEach((item) => {
+    const checked= types.includes(item)
     items.push({
       value: item,
       text: item,

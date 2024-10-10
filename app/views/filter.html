@@ -42,33 +42,6 @@
             items: types
           }) }}
 
-          {{ govukCheckboxes({
-            idPrefix: 'status',
-            name: 'status',
-            classes: "govuk-checkboxes--small",
-            fieldset: {
-              legend: {
-                text: 'Status',
-                classes: 'govuk-fieldset__legend--m'
-              }
-            },
-            items: [
-              {
-                value: 'complete',
-                text: 'Completed (2)',
-                checked: true
-              },
-              {
-                value: 'incomplete',
-                text: 'Incomplete (5)'
-              },
-              {
-                value: 'inprogress',
-                text: 'In progress (3)',
-                checked: false
-              }
-            ]
-          }) }}
         {% endset -%}
 
         {{ mojFilter({
@@ -83,16 +56,13 @@
           },
 
           selectedFilters: {
-
             heading: {
               text: 'Selected filters'
             },
-
             clearLink: {
               text: 'Clear filters',
               href: '/filter'
             },
-
             categories: [
               {
                 heading: {
@@ -104,15 +74,6 @@
               }, {
                 href: '/path/to/remove/this',
                 text: 'Yellow'
-              }]
-              },
-              {
-                heading: {
-                text: 'Status'
-              },
-                items: [{
-                href: '/path/to/remove/this',
-                text: 'Completed'
               }]
               }
             ]
