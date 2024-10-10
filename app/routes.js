@@ -41,14 +41,21 @@ router.post('/country-answer', function(request, response) {
   }
 })
 
+
+
+
+
+
 router.get('/filter', function(request, response) {
   const customers = request.session.data['customers']
   const query = request.query
+  const url = buildUrlWithQueries('/filter', request.query)
   const view = {
     count: customers.length,
     results: transform(customers),
     firstName: query.firstName,
-    types: query.types !== undefined ? getTypes(query.types.split(',')) : getTypes([])
+    types: query.types !== undefined ? getTypes(query.types.split(',')) : getTypes([]),
+    typeFilterItems: query.types !== undefined? getTypeFilterItems(query.types.split(',')) : getTypeFilterItems([]),
   }
   response.render('/filter', view)
 })
@@ -61,7 +68,7 @@ const buildUrlWithQueries = (path, body) => {
   const firstName = body.firstName !== '' ? 'firstName=' + body.firstName + '&' : ''
   const normaliseTypes = normaliseCheckBoxes(body.types)
   const types= normaliseTypes !== '' ? 'types=' + normaliseTypes + '&' : ''
-  return path + '?' + firstName + types
+  return (path + '?' + firstName + types).replace(/&([^&]*)$/, '$1')
 }
 const normaliseCheckBoxes = (types) => {
   if (!Array.isArray(types)) {
@@ -69,26 +76,23 @@ const normaliseCheckBoxes = (types) => {
   }
   return types.filter(type => type !== '_unchecked').join(',')
 }
-// categories: [
-//   {
-//     heading: {
-//       text: 'Type'
-//     },
-//     items: [{
-//       href: '/path/to/remove/this',
-//       text: 'Blue'
-//     }, {
-//       href: '/path/to/remove/this',
-//       text: 'Yellow'
-//     }]
-//   }
-// ]
 
+const getTypeFilterItems = (types=[]) => {
+  let items=[]
+  types.forEach(type => {
+    items.push({
+      // TODO - this needs fixing
+      href: '/path/to/remove/this',
+      text: type
+    })
+  })
+  return items
+}
 
 const options = ['Blue', 'Yellow', 'Red']
 const getTypes = (types=[]) => {
   let items = []
-  options.forEach((item) => {
+  options.forEach(item => {
     const checked= types.includes(item)
     items.push({
       value: item,
