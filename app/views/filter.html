@@ -129,7 +129,7 @@
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
         {% for result in results %}
-          <h2 class="govuk-!-margin-bottom-1 govuk-!-font-weight-bold govuk-heading-m">{{ result.name }}</h2>
+          <h2 class="govuk-!-margin-bottom-1 govuk-!-font-weight-bold govuk-heading-m">{{ result.firstName + ' ' + result.surname }}</h2>
           <p>{{ result.niNumber }}</p>
           <p class="govuk-!-margin-bottom-1"><span class="govuk-!-font-weight-bold">Postcode: </span>{{ result.postcode }}</p>
           <p class="govuk-!-margin-bottom-1"><span class="govuk-!-font-weight-bold">IND Number: </span>{{ result.indNumber }}</p>

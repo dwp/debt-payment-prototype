@@ -2,11 +2,9 @@
 // For guidance on how to create routes see:
 // https://prototype-kit.service.gov.uk/docs/create-routes
 //
-
+const filterService = require('./services/filterService')
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
-
-const benefitTypeIdOptions = ['TCOP', 'UCOP', 'UCNCA', 'UCBA']
 
 // Logging session data
 // This code shows in the terminal what session data has been saved.
@@ -42,11 +40,6 @@ router.post('/country-answer', function(request, response) {
   }
 })
 
-
-
-
-
-
 router.get('/filter', function(request, response) {
   const customers = request.session.data['customers']
   // const url = buildUrlWithQueries('/filter', request.query)
@@ -64,22 +57,22 @@ router.get('/filter', function(request, response) {
   // // Output: "https://example.com/?name=John&city=NewYork"
 
   const query = request.query
-  const filteredCustomers = filterCustomer(query, customers)
-  const firstNameFilter = query.firstName !== undefined ? getSingleFilterItem(request.url, '/filter?','firstName', query.firstName): []
-  const surnameFilter= query.surname !== undefined ? getSingleFilterItem(request.url, '/filter?','surname', query.surname): []
-  const postcodeFilter= query.postcode !== undefined ? getSingleFilterItem(request.url, '/filter?','postcode', query.postcode): []
-  const benefitTypeIdFilterItems = query.benefitTypeId !== undefined? getManyFilterItems(query.benefitTypeId.split(',')) : getManyFilterItems([])
+  const filteredCustomers = filterService.filterCustomer(query, customers)
+  const firstNameFilter = query.firstName !== undefined ? filterService.getSingleFilterItem(request.url, '/filter?','firstName', query.firstName): []
+  const surnameFilter= query.surname !== undefined ? filterService.getSingleFilterItem(request.url, '/filter?','surname', query.surname): []
+  const postcodeFilter= query.postcode !== undefined ? filterService.getSingleFilterItem(request.url, '/filter?','postcode', query.postcode): []
+  const benefitTypeIdFilterItems = query.benefitTypeId !== undefined? filterService.getManyFilterItems(query.benefitTypeId.split(',')) : filterService.getManyFilterItems([])
   const view = {
     count: filteredCustomers.length,
-    results: transform(filteredCustomers),
+    results: filteredCustomers,
     firstName: query.firstName,
     firstNameFilter,
     surname: query.surname,
     surnameFilter,
     postcode: query.postcode,
     postcodeFilter,
-    benefitTypeId: query.benefitTypeId !== undefined ? getBenefitTypeIds(query.benefitTypeId.split(',')) : getBenefitTypeIds([]),
-    selectedFilters: buildSelectedFilters({
+    benefitTypeId: query.benefitTypeId !== undefined ? filterService.getBenefitTypeIds(query.benefitTypeId.split(',')) : filterService.getBenefitTypeIds([]),
+    selectedFilters: filterService.buildSelectedFilters({
       firstNameFilter,
       surnameFilter,
       postcodeFilter,
@@ -89,129 +82,9 @@ router.get('/filter', function(request, response) {
   response.render('/filter', view)
 })
 
-const filterCustomer = (query, customers) => {
-  let filteredCustomers= customers
-  if (query.firstName) {
-    filteredCustomers = filteredCustomers.filter(customer => customer.firstName.includes(query.firstName))
-  }
-  if (query.surname) {
-    filteredCustomers = filteredCustomers.filter(customer => customer.surname.includes(query.surname))
-  }
-  if (query.postcode) {
-    filteredCustomers = filteredCustomers.filter(customer => customer.postcode.includes(query.postcode))
-  }
-  if (query.benefitTypeId) {
-    filteredCustomers = filteredCustomers.filter(customer => customer.benefitTypeId.includes(query.benefitTypeId))
-  }
-  return filteredCustomers
-}
-
 router.post('/filter', function(request, response) {
   const body = request.body
-  response.redirect(buildUrlWithQueries('/filter', body))
+  response.redirect(filterService.buildUrlWithQueries('/filter', body))
 })
-const buildUrlWithQueries = (path, body) => {
-  const firstName = body.firstName !== '' ? 'firstName=' + body.firstName + '&' : ''
-  const surname = body.surname !== '' ? 'surname=' + body.surname + '&' : ''
-  const postcode = body.postcode !== '' ? 'postcode=' + body.postcode + '&' : ''
-  const normaliseBenefitTypeId = normaliseCheckBoxes(body.benefitTypeId)
-  const benefitTypeId= normaliseBenefitTypeId !== '' ? 'benefitTypeId=' + normaliseBenefitTypeId + '&' : ''
-  return (path + '?' + firstName + surname + postcode + benefitTypeId).replace(/&([^&]*)$/, '$1')
-}
-const normaliseCheckBoxes = (types) => {
-  if (!Array.isArray(types)) {
-    return ''
-  }
-  return types.filter(type => type !== '_unchecked').join(',')
-}
-const buildSelectedFilters = (filter) => {
-  if (!isSelectedFilter(filter)) {
-    return ''
-  }
-  let categories = []
-  if (filter.firstNameFilter.length) {
-    categories.push(buildCategory('First name', filter.firstNameFilter))
-  }
-  if (filter.surnameFilter.length) {
-    categories.push(buildCategory('Last name', filter.surnameFilter))
-  }
-  if (filter.postcodeFilter.length) {
-    categories.push(buildCategory('Postcode', filter.postcodeFilter))
-  }
-  if (filter.benefitTypeIdFilterItems.length) {
-    categories.push(buildCategory('Benefit type ID', filter.benefitTypeIdFilterItems))
-  }
 
-  return {
-    heading: {
-      text: 'Selected filters'
-    },
-    clearLink: {
-      text: 'Clear filters',
-      href: '/filter'
-    },
-    categories: categories
-  }
-}
-const isSelectedFilter = (filter) => {
-  return filter.firstNameFilter.length ||
-      filter.surnameFilter.length ||
-      filter.postcodeFilter.length ||
-      filter.benefitTypeIdFilterItems.length
-}
-const buildCategory = (text, filter) => {
-  return {
-    heading: {
-      text: text
-    },
-    items: filter
-  }
-}
-const getManyFilterItems = (types=[]) => {
-  let items=[]
-  types.forEach(type => {
-    items.push({
-      // TODO - this needs fixing
-      href: '/path/to/remove/this',
-      text: type
-    })
-  })
-  return items
-}
-const getSingleFilterItem = (url, path , key, value) => {
-  const searchParams = url.split('?')[1] || ''
-  const urlSearchParams = new URLSearchParams(searchParams)
-  urlSearchParams.delete(key)
-  return [{
-      href: path + urlSearchParams.toString(),
-      text: value
-    }]
-}
-
-const getBenefitTypeIds = (types=[]) => {
-  let items = []
-  benefitTypeIdOptions.forEach(item => {
-    const checked= types.includes(item)
-    items.push({
-      value: item,
-      text: item,
-      checked: checked
-    })
-  })
-  return items
-}
-const transform = (customers) => {
-  let results = []
-  customers.forEach(customer => {
-    results.push({
-      name: customer.firstName + ' ' + customer.surname,
-      niNumber: customer.niNumber,
-      postcode:customer.postcode,
-      benefitTypeId:customer.benefitTypeId,
-      indNumber:customer.indNumber,
-      indDebtBalance:customer.indDebtBalance
-    })
-  })
-  return results
-}
-  // Add your routes here
+// Add your routes here
