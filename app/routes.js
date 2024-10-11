@@ -61,16 +61,13 @@ router.get('/filter', function(request, response) {
   const firstNameFilter = query.firstName !== undefined ? filterService.getSingleFilterItem(request.url, '/filter?','firstName', query.firstName): []
   const surnameFilter= query.surname !== undefined ? filterService.getSingleFilterItem(request.url, '/filter?','surname', query.surname): []
   const postcodeFilter= query.postcode !== undefined ? filterService.getSingleFilterItem(request.url, '/filter?','postcode', query.postcode): []
-  const benefitTypeIdFilterItems = query.benefitTypeId !== undefined? filterService.getManyFilterItems(query.benefitTypeId.split(',')) : filterService.getManyFilterItems([])
+  const benefitTypeIdFilterItems = query.benefitTypeId !== undefined? filterService.getManyFilterItems(request.url, '/filter?','benefitTypeId', query.benefitTypeId.split(',')) : []
   const view = {
     count: filteredCustomers.length,
     results: filteredCustomers,
     firstName: query.firstName,
-    firstNameFilter,
     surname: query.surname,
-    surnameFilter,
     postcode: query.postcode,
-    postcodeFilter,
     benefitTypeId: query.benefitTypeId !== undefined ? filterService.getBenefitTypeIds(query.benefitTypeId.split(',')) : filterService.getBenefitTypeIds([]),
     selectedFilters: filterService.buildSelectedFilters({
       firstNameFilter,

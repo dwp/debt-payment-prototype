@@ -82,15 +82,32 @@ const getSingleFilterItem = (url, path , key, value) => {
     text: value
   }]
 }
-const getManyFilterItems = (types=[]) => {
+const getManyFilterItems = (url, path , key, values) => {
   let items=[]
-  types.forEach(type => {
+
+  const searchParams = url.split('?')[1] || ''
+  values.forEach(value => {
+    const urlSearchParams = new URLSearchParams(searchParams)
+    urlSearchParams.set(
+        key,
+        urlSearchParams
+        .get(key)
+        ?.split(',')
+        .filter(colour => colour !== value)
+        .join(',')
+    )
+
+    // Remove if no other option
+    if (urlSearchParams.get(key) === '') {
+      urlSearchParams.delete(key)
+    }
+
     items.push({
-      // TODO - this needs fixing
-      href: '/path/to/remove/this',
-      text: type
+      href: path + urlSearchParams.toString(),
+      text: value
     })
   })
+
   return items
 }
 const getBenefitTypeIds = (types=[]) => {
