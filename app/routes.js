@@ -50,17 +50,31 @@ router.post('/country-answer', function(request, response) {
 router.get('/filter', function(request, response) {
   const customers = request.session.data['customers']
   // const url = buildUrlWithQueries('/filter', request.query)
+
+
+  // Given URL with a query string
+  // // const url = new URL('/filter?name=John&age=30&colour=Red,Black,Yellow&city=NewYork');
+  // const url = new URLSearchParams('name=John&age=30&colour=Red,Black,Yellow&city=NewYork');
+  // // Remove the key-value pair (e.g., 'age')
+  // url.delete('age');
+  // // url.delete('Yellow');
+  // // Get the updated URL as a string
+  // const updatedUrl = url.toString();
+  // console.log(updatedUrl);
+  // // Output: "https://example.com/?name=John&city=NewYork"
+
+
   const query = request.query
   const filteredCustomers = filterCustomer(query, customers)
   const view = {
     count: filteredCustomers.length,
     results: transform(filteredCustomers),
     firstName: query.firstName,
-    firstNameFilter: query.firstName !== undefined ? getSingleFilterItem(query.firstName): [],
+    firstNameFilter: query.firstName !== undefined ? getSingleFilterItem(request.url, '/filter?','firstName', query.firstName): [],
     surname: query.surname,
-    surnameFilter: query.surname !== undefined ? getSingleFilterItem(query.surname): [],
+    surnameFilter: query.surname !== undefined ? getSingleFilterItem(request.url, '/filter?','surname', query.surname): [],
     postcode: query.postcode,
-    postcodeFilter: query.postcode !== undefined ? getSingleFilterItem(query.postcode): [],
+    postcodeFilter: query.postcode !== undefined ? getSingleFilterItem(request.url, '/filter?','postcode', query.postcode): [],
     benefitTypeId: query.benefitTypeId !== undefined ? getBenefitTypeIds(query.benefitTypeId.split(',')) : getBenefitTypeIds([]),
     benefitTypeIdFilterItems: query.benefitTypeId !== undefined? getManyFilterItems(query.benefitTypeId.split(',')) : getManyFilterItems([]),
   }
@@ -114,10 +128,13 @@ const getManyFilterItems = (types=[]) => {
   })
   return items
 }
-const getSingleFilterItem = (text) => {
+const getSingleFilterItem = (url, path , key, value) => {
+  const searchParams = url.split('?')[1] || ''
+  const urlSearchParams = new URLSearchParams(searchParams)
+  urlSearchParams.delete(key)
   return [{
-      href: '/path/to/remove/this',
-      text: text
+      href: path + urlSearchParams.toString(),
+      text: value
     }]
 }
 
