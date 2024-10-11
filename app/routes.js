@@ -63,20 +63,28 @@ router.get('/filter', function(request, response) {
   // console.log(updatedUrl);
   // // Output: "https://example.com/?name=John&city=NewYork"
 
-
   const query = request.query
   const filteredCustomers = filterCustomer(query, customers)
+  const firstNameFilter = query.firstName !== undefined ? getSingleFilterItem(request.url, '/filter?','firstName', query.firstName): []
+  const surnameFilter= query.surname !== undefined ? getSingleFilterItem(request.url, '/filter?','surname', query.surname): []
+  const postcodeFilter= query.postcode !== undefined ? getSingleFilterItem(request.url, '/filter?','postcode', query.postcode): []
+  const benefitTypeIdFilterItems = query.benefitTypeId !== undefined? getManyFilterItems(query.benefitTypeId.split(',')) : getManyFilterItems([])
   const view = {
     count: filteredCustomers.length,
     results: transform(filteredCustomers),
     firstName: query.firstName,
-    firstNameFilter: query.firstName !== undefined ? getSingleFilterItem(request.url, '/filter?','firstName', query.firstName): [],
+    firstNameFilter,
     surname: query.surname,
-    surnameFilter: query.surname !== undefined ? getSingleFilterItem(request.url, '/filter?','surname', query.surname): [],
+    surnameFilter,
     postcode: query.postcode,
-    postcodeFilter: query.postcode !== undefined ? getSingleFilterItem(request.url, '/filter?','postcode', query.postcode): [],
+    postcodeFilter,
     benefitTypeId: query.benefitTypeId !== undefined ? getBenefitTypeIds(query.benefitTypeId.split(',')) : getBenefitTypeIds([]),
-    benefitTypeIdFilterItems: query.benefitTypeId !== undefined? getManyFilterItems(query.benefitTypeId.split(',')) : getManyFilterItems([]),
+    selectedFilters: buildSelectedFilters({
+      firstNameFilter,
+      surnameFilter,
+      postcodeFilter,
+      benefitTypeIdFilterItems
+    })
   }
   response.render('/filter', view)
 })
@@ -116,7 +124,49 @@ const normaliseCheckBoxes = (types) => {
   }
   return types.filter(type => type !== '_unchecked').join(',')
 }
+const buildSelectedFilters = (filter) => {
+  if (!isSelectedFilter(filter)) {
+    return ''
+  }
+  let categories = []
+  if (filter.firstNameFilter.length) {
+    categories.push(buildCategory('First name', filter.firstNameFilter))
+  }
+  if (filter.surnameFilter.length) {
+    categories.push(buildCategory('Last name', filter.surnameFilter))
+  }
+  if (filter.postcodeFilter.length) {
+    categories.push(buildCategory('Postcode', filter.postcodeFilter))
+  }
+  if (filter.benefitTypeIdFilterItems.length) {
+    categories.push(buildCategory('Benefit type ID', filter.benefitTypeIdFilterItems))
+  }
 
+  return {
+    heading: {
+      text: 'Selected filters'
+    },
+    clearLink: {
+      text: 'Clear filters',
+      href: '/filter'
+    },
+    categories: categories
+  }
+}
+const isSelectedFilter = (filter) => {
+  return filter.firstNameFilter.length ||
+      filter.surnameFilter.length ||
+      filter.postcodeFilter.length ||
+      filter.benefitTypeIdFilterItems.length
+}
+const buildCategory = (text, filter) => {
+  return {
+    heading: {
+      text: text
+    },
+    items: filter
+  }
+}
 const getManyFilterItems = (types=[]) => {
   let items=[]
   types.forEach(type => {
