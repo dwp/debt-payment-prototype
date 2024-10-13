@@ -2,9 +2,9 @@
 // For guidance on how to create routes see:
 // https://prototype-kit.service.gov.uk/docs/create-routes
 //
-const filterService = require('./services/filterService')
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
+const filterService = require('./services/filterService')
 
 // Logging session data
 // This code shows in the terminal what session data has been saved.
@@ -42,22 +42,10 @@ router.post('/country-answer', function(request, response) {
 
 router.get('/filter', function(request, response) {
   const customers = request.session.data['customers']
-  // const url = buildUrlWithQueries('/filter', request.query)
-
-
-  // Given URL with a query string
-  // // const url = new URL('/filter?name=John&age=30&colour=Red,Black,Yellow&city=NewYork');
-  // const url = new URLSearchParams('name=John&age=30&colour=Red,Black,Yellow&city=NewYork');
-  // // Remove the key-value pair (e.g., 'age')
-  // url.delete('age');
-  // // url.delete('Yellow');
-  // // Get the updated URL as a string
-  // const updatedUrl = url.toString();
-  // console.log(updatedUrl);
-  // // Output: "https://example.com/?name=John&city=NewYork"
 
   const query = request.query
-  const filteredCustomers = filterService.filterCustomer(query, customers)
+  const filteredCustomers = filterService.filterCustomers(query, customers)
+  const benefitTypeIds =  query.benefitTypeId !== undefined ? filterService.getBenefitTypeIds(query.benefitTypeId.split(',')) : filterService.getBenefitTypeIds([])
   const firstNameFilter = query.firstName !== undefined ? filterService.getSingleFilterItem(request.url, '/filter?','firstName', query.firstName): []
   const surnameFilter= query.surname !== undefined ? filterService.getSingleFilterItem(request.url, '/filter?','surname', query.surname): []
   const postcodeFilter= query.postcode !== undefined ? filterService.getSingleFilterItem(request.url, '/filter?','postcode', query.postcode): []
@@ -68,7 +56,7 @@ router.get('/filter', function(request, response) {
     firstName: query.firstName,
     surname: query.surname,
     postcode: query.postcode,
-    benefitTypeId: query.benefitTypeId !== undefined ? filterService.getBenefitTypeIds(query.benefitTypeId.split(',')) : filterService.getBenefitTypeIds([]),
+    benefitTypeIds,
     selectedFilters: filterService.buildSelectedFilters({
       firstNameFilter,
       surnameFilter,

@@ -1,5 +1,5 @@
 const benefitTypeIdOptions = ['TCOP', 'UCOP', 'UCNCA', 'UCBA']
-const filterCustomer = (query, customers) => {
+const filterCustomers = (query, customers) => {
   let filteredCustomers= customers
   if (query.firstName) {
     filteredCustomers = filteredCustomers.filter(customer => customer.firstName.includes(query.firstName))
@@ -23,12 +23,6 @@ const buildUrlWithQueries = (path, body) => {
   const normaliseBenefitTypeId = normaliseCheckBoxes(body.benefitTypeId)
   const benefitTypeId= normaliseBenefitTypeId !== '' ? 'benefitTypeId=' + normaliseBenefitTypeId + '&' : ''
   return (path + '?' + firstName + surname + postcode + benefitTypeId).replace(/&([^&]*)$/, '$1')
-}
-const normaliseCheckBoxes = (types) => {
-  if (!Array.isArray(types)) {
-    return ''
-  }
-  return types.filter(type => type !== '_unchecked').join(',')
 }
 const buildSelectedFilters = (filter) => {
   if (!isSelectedFilter(filter)) {
@@ -59,20 +53,6 @@ const buildSelectedFilters = (filter) => {
     categories: categories
   }
 }
-const isSelectedFilter = (filter) => {
-  return filter.firstNameFilter.length ||
-      filter.surnameFilter.length ||
-      filter.postcodeFilter.length ||
-      filter.benefitTypeIdFilterItems.length
-}
-const buildCategory = (text, filter) => {
-  return {
-    heading: {
-      text: text
-    },
-    items: filter
-  }
-}
 const getSingleFilterItem = (url, path , key, value) => {
   const searchParams = url.split('?')[1] || ''
   const urlSearchParams = new URLSearchParams(searchParams)
@@ -83,9 +63,8 @@ const getSingleFilterItem = (url, path , key, value) => {
   }]
 }
 const getManyFilterItems = (url, path , key, values) => {
-  let items=[]
-
   const searchParams = url.split('?')[1] || ''
+  let items=[]
   values.forEach(value => {
     const urlSearchParams = new URLSearchParams(searchParams)
     urlSearchParams.set(
@@ -107,7 +86,6 @@ const getManyFilterItems = (url, path , key, values) => {
       text: value
     })
   })
-
   return items
 }
 const getBenefitTypeIds = (types=[]) => {
@@ -122,12 +100,32 @@ const getBenefitTypeIds = (types=[]) => {
   })
   return items
 }
+const normaliseCheckBoxes = (types) => {
+  if (!Array.isArray(types)) {
+    return ''
+  }
+  return types.filter(type => type !== '_unchecked').join(',')
+}
+const isSelectedFilter = (filter) => {
+  return filter.firstNameFilter.length ||
+      filter.surnameFilter.length ||
+      filter.postcodeFilter.length ||
+      filter.benefitTypeIdFilterItems.length
+}
+const buildCategory = (text, filter) => {
+  return {
+    heading: {
+      text: text
+    },
+    items: filter
+  }
+}
 
 module.exports = {
-  filterCustomer,
+  filterCustomers,
   buildUrlWithQueries,
   buildSelectedFilters,
-  getBenefitTypeIds,
   getSingleFilterItem,
-  getManyFilterItems
+  getManyFilterItems,
+  getBenefitTypeIds
 }
