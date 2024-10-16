@@ -10,6 +10,9 @@ const filterCustomers = (query, customers) => {
   if (query.postcode) {
     filteredCustomers = filteredCustomers.filter(customer => customer.postcode.includes(query.postcode))
   }
+  if (query.niNumber) {
+    filteredCustomers = filteredCustomers.filter(customer => customer.niNumber.includes(query.niNumber))
+  }
   if (query.benefitTypeId) {
     filteredCustomers = filteredCustomers.filter(customer => customer.benefitTypeId.includes(query.benefitTypeId))
   }
@@ -20,9 +23,10 @@ const buildUrlWithQueries = (path, body) => {
   const firstName = body.firstName !== '' ? 'firstName=' + body.firstName + '&' : ''
   const surname = body.surname !== '' ? 'surname=' + body.surname + '&' : ''
   const postcode = body.postcode !== '' ? 'postcode=' + body.postcode + '&' : ''
+  const niNumber = body.niNumber !== '' ? 'niNumber=' + body.niNumber + '&' : ''
   const normaliseBenefitTypeId = normaliseCheckBoxes(body.benefitTypeId)
   const benefitTypeId= normaliseBenefitTypeId !== '' ? 'benefitTypeId=' + normaliseBenefitTypeId + '&' : ''
-  return (path + '?' + firstName + surname + postcode + benefitTypeId).replace(/&([^&]*)$/, '$1')
+  return (path + '?' + firstName + surname + postcode + niNumber + benefitTypeId).replace(/&([^&]*)$/, '$1')
 }
 const buildSelectedFilters = (filter) => {
   if (!isSelectedFilter(filter)) {
@@ -37,6 +41,9 @@ const buildSelectedFilters = (filter) => {
   }
   if (filter.postcodeFilter.length) {
     categories.push(buildCategory('Postcode', filter.postcodeFilter))
+  }
+  if (filter.niNumberFilter.length) {
+    categories.push(buildCategory('National Insurance number', filter.niNumberFilter))
   }
   if (filter.benefitTypeIdFilterItems.length) {
     categories.push(buildCategory('Benefit type ID', filter.benefitTypeIdFilterItems))
@@ -110,6 +117,7 @@ const isSelectedFilter = (filter) => {
   return filter.firstNameFilter.length ||
       filter.surnameFilter.length ||
       filter.postcodeFilter.length ||
+      filter.niNumberFilter.length ||
       filter.benefitTypeIdFilterItems.length
 }
 const buildCategory = (text, filter) => {

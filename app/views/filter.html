@@ -4,7 +4,7 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+  Search results – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block beforeContent %}
@@ -16,6 +16,11 @@
 
 {% block content %}
   <form class="form" action="/filter" method="post">
+
+    <h1 class="govuk-heading-xl">
+      Search results
+    </h1>
+
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-third">
         {%- set filterOptionsHtml %}
@@ -26,7 +31,7 @@
             name: 'firstName',
             label: {
               text: 'First name',
-              classes: 'govuk-label--m'
+              classes: 'govuk-label--s'
             },
             value: firstName
           }) }}
@@ -38,7 +43,7 @@
             name: 'surname',
             label: {
               text: 'Last name',
-              classes: 'govuk-label--m'
+              classes: 'govuk-label--s'
             },
             value: surname
           }) }}
@@ -50,60 +55,65 @@
             name: 'postcode',
             label: {
               text: 'Postcode',
-              classes: 'govuk-label--m'
+              classes: 'govuk-label--s'
             },
             value: postcode
           }) }}
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
-          {#  IND number        #}
-{#          {{ govukInput({#}
-{#            id: 'ind-number',#}
-{#            name: 'indNumber',#}
-{#            label: {#}
-{#              text: 'IND number',#}
-{#              classes: 'govuk-label--m'#}
-{#            },#}
-{#            value: indNumber#}
-{#          }) }}#}
-{#          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">#}
+          {#  National Insurance number        #}
+          {{ govukInput({
+            id: 'ni-number',
+            name: 'niNumber',
+            label: {
+              text: 'National Insurance number',
+              classes: 'govuk-label--s'
+            },
+            value: niNumber
+          }) }}
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+
+          {#  IND number     #}   
+            {{ govukInput({
+              id: 'ind-number',
+              name: 'indNumber',
+              label: {
+                text: 'IND number',
+                classes: 'govuk-label--s'
+              },
+              value: indNumber
+            }) }}
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
           {#  Benefit type ID        #}
           {{ govukCheckboxes({
             idPrefix: 'benefit-type-id',
             name: 'benefitTypeId',
-            classes: "govuk-checkboxes--medium",
+            classes: "govuk-checkboxes--small",
             fieldset: {
               legend: {
                 text: 'Benefit type ID',
-                classes: 'govuk-fieldset__legend--m'
+                classes: 'govuk-fieldset__legend--s'
               }
             },
             items: benefitTypeIds
           }) }}
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
-{#          #}{#  IND debt balance        #}
-{#          {{ govukInput({#}
-{#            id: 'ind-number',#}
-{#            name: 'indNumber',#}
-{#            label: {#}
-{#              text: 'IND debt balance',#}
-{#              classes: 'govuk-label--m'#}
-{#            },#}
-{#            value: indNumber#}
-{#          }) }}#}
-{#          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">#}
 
-{#          #}{#  National Insurance number        #}
-{#          {{ govukInput({#}
-{#            id: 'ni-number',#}
-{#            name: 'niNumber',#}
-{#            label: {#}
-{#              text: 'National Insurance number',#}
-{#              classes: 'govuk-label--m'#}
-{#            },#}
-{#            value: niNumber#}
-{#          }) }}#}
+            {#  IND debt balance        #}
+          {{ govukInput({
+            id: 'ind-debt-balance',
+            name: 'indDebtBalance',
+            label: {
+              text: 'IND debt balance',
+              classes: 'govuk-label--s'
+            },
+            value: indDebtBalance
+          }) }}
+
+        
 
         {% endset -%}
 
@@ -120,20 +130,87 @@
           optionsHtml: filterOptionsHtml
         }) }}
       </div>
+
       <div class="govuk-grid-column-two-thirds">
-        <h3 class="govuk-heading-s">
-          {{ count }} results
-        </h3>
+        <h2 class="govuk-heading-m">
+          {{ count }} customer records
+        </h2>
+
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
         {% for result in results %}
-          <h2 class="govuk-!-margin-bottom-1 govuk-!-font-weight-bold govuk-heading-m">{{ result.firstName + ' ' + result.surname }}</h2>
-          <p>{{ result.niNumber }}</p>
+
+
+          <!-- <h2 class="govuk-!-margin-bottom-1 govuk-!-font-weight-bold govuk-heading-m">{{ result.firstName + ' ' + result.surname }}</h2>
+          <p class="govuk-body-l">{{ result.niNumber }}</p>
           <p class="govuk-!-margin-bottom-1"><span class="govuk-!-font-weight-bold">Postcode: </span>{{ result.postcode }}</p>
-          <p class="govuk-!-margin-bottom-1"><span class="govuk-!-font-weight-bold">IND Number: </span>{{ result.indNumber }}</p>
+          <p class="govuk-!-margin-bottom-1"><span class="govuk-!-font-weight-bold">IND number: </span>{{ result.indNumber }}</p>
           <p class="govuk-!-margin-bottom-1"><span class="govuk-!-font-weight-bold">Benefit type ID: </span>{{ result.benefitTypeId }}</p>
           <p class="govuk-!-margin-bottom-1"><span class="govuk-!-font-weight-bold">IND debt balance: </span>£{{ result.indDebtBalance }}</p>
-          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible"> -->
+
+
+          <div class="govuk-summary-card">
+
+            <div class="govuk-summary-card__title-wrapper">
+              <h2 class="govuk-summary-card__title">
+                {{ result.firstName + ' ' + result.surname }}
+              </h2>
+            </div>
+
+            <div class="govuk-summary-card__content">
+
+              <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    National Insurance number
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{ result.niNumber }}
+                  </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Postcode
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{ result.postcode }}
+                  </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    IND number
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{ result.indNumber }}
+                  </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Benefit type ID
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{ result.benefitTypeId }}
+                  </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    IND debt balance
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    £{{ result.indDebtBalance }}
+                  </dd>
+                </div>
+
+              </dl>
+
+            </div>
+          </div>
+
         {% endfor %}
       </div>
     </div>
