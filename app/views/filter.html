@@ -21,6 +21,27 @@
       Search results
     </h1>
 
+<!-- start search criteria -->
+    <p class="govuk-body">Your search:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>Employer name: <span class="govuk-!-font-weight-bold">ASDA Stores Ltd</span></li>
+          <li>Employee staff reference: <span class="govuk-!-font-weight-bold">039876</span></li>
+          <!-- <li>First name: <span class="govuk-!-font-weight-bold">J</span></li> -->
+          <li>Last name: <span class="govuk-!-font-weight-bold">Williams</span></li>
+          <!-- <li>National Insurance number: <span class="govuk-!-font-weight-bold">KL483920C</span></li> -->
+          <li>VRA or IND balance: <span class="govuk-!-font-weight-bold">£255.73</span></li>
+        </ul>
+      </p>
+
+        <p class="govuk-body">
+          <a href="javascript:window.history.back()" class="govuk-link">Change search</a>
+        </p>
+
+<!-- end search criteria -->
+
+        <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+<!--  filter - fields -->
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-third">
         {%- set filterOptionsHtml %}
@@ -49,18 +70,6 @@
           }) }}
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
-          {#  Postcode        #}
-          {{ govukInput({
-            id: 'postcode',
-            name: 'postcode',
-            label: {
-              text: 'Postcode',
-              classes: 'govuk-label--s'
-            },
-            value: postcode
-          }) }}
-          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-
           {#  National Insurance number        #}
           {{ govukInput({
             id: 'ni-number',
@@ -73,50 +82,86 @@
           }) }}
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
-
-          {#  IND number     #}   
-            {{ govukInput({
-              id: 'ind-number',
-              name: 'indNumber',
-              label: {
-                text: 'IND number',
-                classes: 'govuk-label--s'
-              },
-              value: indNumber
-            }) }}
+          {#  Postcode        #}
+          {{ govukInput({
+            id: 'postcode',
+            name: 'postcode',
+            label: {
+              text: 'Employer postcode',
+              classes: 'govuk-label--s'
+            },
+            value: postcode
+          }) }}
+          
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
-          {#  Benefit type ID        #}
-          {{ govukCheckboxes({
+
+            {#  VRA debt balance        #}
+          {{ govukInput({
+            id: 'vra-balance',
+            name: 'vraBalance',
+            label: {
+              text: 'VRA balance',
+              classes: 'govuk-label--s'
+            },
+            prefix: {
+              text: "£"
+            },
+            value: vraBalance
+          }) }}
+
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+          {#  IND debt balance        #}
+          {{ govukInput({
+            id: 'ind-balance',
+            name: 'indBalance',
+            label: {
+              text: 'IND balance',
+              classes: 'govuk-label--s'
+            },
+            prefix: {
+              text: "£"
+            },
+            value: indBalance
+          }) }}
+
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+          {#  DEA type       #}
+          {{ govukRadios({
             idPrefix: 'benefit-type-id',
             name: 'benefitTypeId',
-            classes: "govuk-checkboxes--small",
+            classes: "govuk-radios--small",
             fieldset: {
               legend: {
-                text: 'Benefit type ID',
+                text: 'DEA type',
                 classes: 'govuk-fieldset__legend--s'
               }
             },
             items: benefitTypeIds
           }) }}
-          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
+<!--  filter - fields -->
 
-            {#  IND debt balance        #}
-          {{ govukInput({
-            id: 'ind-debt-balance',
-            name: 'indDebtBalance',
-            label: {
-              text: 'IND debt balance',
-              classes: 'govuk-label--s'
+ <!-- filter - apply filters button -->
+ <!-- <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+ {{ govukButton({
+            text: "Apply filters",
+            submit: {
+              attributes: {
+                "data-test-id": "submit-button"
+              }
             },
-            value: indDebtBalance
-          }) }}
-
-        
+            selectedFilters: selectedFilters,
+            optionsHtml: filterOptionsHtml
+          }) }} -->
+ <!-- filter - apply filters button -->
 
         {% endset -%}
 
+<!-- filter - selection -->
         {{ mojFilter({
           heading: {
             text: 'Filter'
@@ -129,8 +174,10 @@
           selectedFilters: selectedFilters,
           optionsHtml: filterOptionsHtml
         }) }}
+<!-- filter - selection -->
       </div>
 
+<!--  filter - results -->
       <div class="govuk-grid-column-two-thirds">
         <h2 class="govuk-heading-m">
           {{ count }} customer records
@@ -138,17 +185,71 @@
 
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
+        <div class="govuk-summary-card">
+
+          <div class="govuk-summary-card__title-wrapper">
+            <h2 class="govuk-summary-card__title">
+              Stacey Williams
+            </h2>
+          </div>
+
+          <div class="govuk-summary-card__content">
+
+            <dl class="govuk-summary-list">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  National Insurance number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  JZ938448D
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Employer postcode
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  CV1 3FJ
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  VRA balance
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  £355.73
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  IND balance
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list govuk-list--bullet">
+                    <li>£100</li>
+                    <li>£255.73</li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Description
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  DEA payment monitoring
+                </dd>
+              </div>
+
+            </dl>
+
+          </div>
+        </div>
+        
         {% for result in results %}
-
-
-          <!-- <h2 class="govuk-!-margin-bottom-1 govuk-!-font-weight-bold govuk-heading-m">{{ result.firstName + ' ' + result.surname }}</h2>
-          <p class="govuk-body-l">{{ result.niNumber }}</p>
-          <p class="govuk-!-margin-bottom-1"><span class="govuk-!-font-weight-bold">Postcode: </span>{{ result.postcode }}</p>
-          <p class="govuk-!-margin-bottom-1"><span class="govuk-!-font-weight-bold">IND number: </span>{{ result.indNumber }}</p>
-          <p class="govuk-!-margin-bottom-1"><span class="govuk-!-font-weight-bold">Benefit type ID: </span>{{ result.benefitTypeId }}</p>
-          <p class="govuk-!-margin-bottom-1"><span class="govuk-!-font-weight-bold">IND debt balance: </span>£{{ result.indDebtBalance }}</p>
-          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible"> -->
-
 
           <div class="govuk-summary-card">
 
@@ -172,7 +273,7 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Postcode
+                    Employer postcode
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {{ result.postcode }}
@@ -181,28 +282,28 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    IND number
+                    VRA balance
                   </dt>
                   <dd class="govuk-summary-list__value">
-                    {{ result.indNumber }}
+                    £{{ result.vraBalance }}
                   </dd>
                 </div>
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Benefit type ID
+                    IND balance
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    £{{ result.indBalance }}
+                  </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Description
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {{ result.benefitTypeId }}
-                  </dd>
-                </div>
-
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    IND debt balance
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    £{{ result.indDebtBalance }}
                   </dd>
                 </div>
 
@@ -210,10 +311,45 @@
 
             </div>
           </div>
-
         {% endfor %}
+
+<!-- start pagination -->
+<nav class="govuk-pagination" aria-label="Pagination">
+  <ul class="govuk-pagination__list">
+    <li class="govuk-pagination__item govuk-pagination__item--current">
+      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1" aria-current="page">
+        1
+      </a>
+    </li>
+    <li class="govuk-pagination__item">
+      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2">
+        2
+      </a>
+    </li>
+    <li class="govuk-pagination__item">
+      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
+        3
+      </a>
+    </li>
+  </ul>
+  <div class="govuk-pagination__next">
+    <a class="govuk-link govuk-pagination__link" href="#" rel="next">
+      <span class="govuk-pagination__link-title">
+        Next<span class="govuk-visually-hidden"> page</span>
+      </span>
+      <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+        <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+      </svg>
+    </a>
+  </div>
+</nav>
+<!-- end pagination -->
       </div>
     </div>
+<!-- end filter - results -->
+
+
+
   </form>
 
 {% endblock %}

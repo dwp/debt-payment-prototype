@@ -1,4 +1,4 @@
-const benefitTypeIdOptions = ['TCOP', 'UCOP', 'UCNCA', 'UCBA']
+const benefitTypeIdOptions = ['Hardship', 'Payment monitoring']
 const filterCustomers = (query, customers) => {
   let filteredCustomers= customers
   if (query.firstName) {
