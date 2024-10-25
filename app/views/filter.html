@@ -35,8 +35,7 @@
         
       <p class="govuk-body">
           <a href="javascript:window.history.back()" class="govuk-link">Change search</a>
-        </p>
-
+      </p>
 <!-- end search criteria -->
 
         <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
@@ -217,15 +216,30 @@
                     £{{ result.vraBalance }}
                   </dd>
                 </div>
+        
+      {% if  (data['{{ result.firstName }}'] == "John") %}
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  IND balance
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list govuk-list--bullet">
+                    <li>£155.73</li>
+                    <li>£100</li>
+                  </ul>
+                </dd>
+              </div>          
+      {% else %}
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  IND balance
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  £{{ result.indBalance }}
+                </dd>
+              </div>
+      {% endif %}
 
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    IND balance
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    £{{ result.indBalance }}
-                  </dd>
-                </div>
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
