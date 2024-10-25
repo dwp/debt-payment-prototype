@@ -8,7 +8,7 @@ module.exports = {
       postcode:"AB1 2DF",
       description:"DEA payment monitoring",
       indBalance: 255.73,
-      vraBalance:255.73
+      vraBalance:255.71
     },
     {
       firstName:"Steven",

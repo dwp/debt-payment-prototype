@@ -40,6 +40,7 @@ router.post('/country-answer', function(request, response) {
   }
 })
 
+// TODO - To update this function when a new field has been added
 router.get('/filter', function(request, response) {
   const customers = request.session.data['customers']
 
@@ -50,6 +51,7 @@ router.get('/filter', function(request, response) {
   const surnameFilter= query.surname !== undefined ? filterService.getSingleFilterItem(request.url, '/filter?','surname', query.surname): []
   const postcodeFilter= query.postcode !== undefined ? filterService.getSingleFilterItem(request.url, '/filter?','postcode', query.postcode): []
   const niNumberFilter= query.niNumber !== undefined ? filterService.getSingleFilterItem(request.url, '/filter?','niNumber', query.niNumber): []
+  const balanceFilter= query.balance !== undefined ? filterService.getSingleFilterItem(request.url, '/filter?','balance', query.balance): []
   const benefitTypeIdFilterItems = query.benefitTypeId !== undefined? filterService.getManyFilterItems(request.url, '/filter?','benefitTypeId', query.benefitTypeId.split(',')) : []
   const view = {
     count: filteredCustomers.length,
@@ -58,12 +60,14 @@ router.get('/filter', function(request, response) {
     surname: query.surname,
     postcode: query.postcode,
     niNumber: query.niNumber,
+    balance: query.balance,
     benefitTypeIds,
     selectedFilters: filterService.buildSelectedFilters({
       firstNameFilter,
       surnameFilter,
       postcodeFilter,
       niNumberFilter,
+      balanceFilter,
       benefitTypeIdFilterItems
     })
   }

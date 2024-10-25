@@ -1,4 +1,5 @@
 const benefitTypeIdOptions = ['Hardship', 'Payment monitoring']
+// TODO - To update this function when a new field has been added
 const filterCustomers = (query, customers) => {
   let filteredCustomers= customers
   if (query.firstName) {
@@ -13,20 +14,25 @@ const filterCustomers = (query, customers) => {
   if (query.niNumber) {
     filteredCustomers = filteredCustomers.filter(customer => customer.niNumber.includes(query.niNumber))
   }
+  if (query.balance) {
+    filteredCustomers = filteredCustomers.filter(customer => customer.vraBalance === parseFloat(query.balance))
+  }
   if (query.benefitTypeId) {
     filteredCustomers = filteredCustomers.filter(customer => customer.benefitTypeId.includes(query.benefitTypeId))
   }
   return filteredCustomers
 }
 
+// TODO - To update this function when a new field has been added
 const buildUrlWithQueries = (path, body) => {
   const firstName = body.firstName !== '' ? 'firstName=' + body.firstName + '&' : ''
   const surname = body.surname !== '' ? 'surname=' + body.surname + '&' : ''
   const postcode = body.postcode !== '' ? 'postcode=' + body.postcode + '&' : ''
   const niNumber = body.niNumber !== '' ? 'niNumber=' + body.niNumber + '&' : ''
+  const balance = body.balance !== '' ? 'balance=' + body.balance + '&' : ''
   const normaliseBenefitTypeId = normaliseCheckBoxes(body.benefitTypeId)
   const benefitTypeId= normaliseBenefitTypeId !== '' ? 'benefitTypeId=' + normaliseBenefitTypeId + '&' : ''
-  return (path + '?' + firstName + surname + postcode + niNumber + benefitTypeId).replace(/&([^&]*)$/, '$1')
+  return (path + '?' + firstName + surname + postcode + niNumber + benefitTypeId + balance).replace(/&([^&]*)$/, '$1')
 }
 const buildSelectedFilters = (filter) => {
   if (!isSelectedFilter(filter)) {
@@ -44,6 +50,9 @@ const buildSelectedFilters = (filter) => {
   }
   if (filter.niNumberFilter.length) {
     categories.push(buildCategory('National Insurance number', filter.niNumberFilter))
+  }
+  if (filter.balanceFilter.length) {
+    categories.push(buildCategory('Balance', filter.balanceFilter))
   }
   if (filter.benefitTypeIdFilterItems.length) {
     categories.push(buildCategory('Benefit type ID', filter.benefitTypeIdFilterItems))
