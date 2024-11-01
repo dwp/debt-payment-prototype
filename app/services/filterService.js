@@ -14,6 +14,12 @@ const filterCustomers = (query, customers) => {
   if (query.niNumber) {
     filteredCustomers = filteredCustomers.filter(customer => customer.niNumber.includes(query.niNumber))
   }
+  if (query.employer) {
+    filteredCustomers = filteredCustomers.filter(customer => customer.employer.includes(query.employer))
+  }
+  if (query.staffNumber) {
+    filteredCustomers = filteredCustomers.filter(customer => customer.staffNumber.includes(query.staffNumber))
+  }
   if (query.balance) {
     filteredCustomers = filteredCustomers.filter(customer => customer.vraBalance === parseFloat(query.balance))
   }
@@ -29,10 +35,12 @@ const buildUrlWithQueries = (path, body) => {
   const surname = body.surname !== '' ? 'surname=' + body.surname + '&' : ''
   const postcode = body.postcode !== '' ? 'postcode=' + body.postcode + '&' : ''
   const niNumber = body.niNumber !== '' ? 'niNumber=' + body.niNumber + '&' : ''
+  const employer = body.employer !== '' ? 'employer=' + body.employer + '&' : ''
+  const staffNumber = body.staffNumber !== '' ? 'staffNumber=' + body.staffNumber + '&' : ''
   const balance = body.balance !== '' ? 'balance=' + body.balance + '&' : ''
   const normaliseBenefitTypeId = normaliseCheckBoxes(body.benefitTypeId)
   const benefitTypeId= normaliseBenefitTypeId !== '' ? 'benefitTypeId=' + normaliseBenefitTypeId + '&' : ''
-  return (path + '?' + firstName + surname + postcode + niNumber + benefitTypeId + balance).replace(/&([^&]*)$/, '$1')
+  return (path + '?' + firstName + surname + postcode + niNumber + benefitTypeId + balance + staffNumber + employer).replace(/&([^&]*)$/, '$1')
 }
 const buildSelectedFilters = (filter) => {
   if (!isSelectedFilter(filter)) {
@@ -51,8 +59,14 @@ const buildSelectedFilters = (filter) => {
   if (filter.niNumberFilter.length) {
     categories.push(buildCategory('National Insurance number', filter.niNumberFilter))
   }
+  if (filter.employerFilter.length) {
+    categories.push(buildCategory('Employer', filter.employerFilter))
+  }
+  if (filter.staffNumberFilter.length) {
+    categories.push(buildCategory('Employee staff reference', filter.staffNumberFilter))
+  }
   if (filter.balanceFilter.length) {
-    categories.push(buildCategory('Balance', filter.balanceFilter))
+    categories.push(buildCategory('VRA balance', filter.balanceFilter))
   }
   if (filter.benefitTypeIdFilterItems.length) {
     categories.push(buildCategory('Benefit type ID', filter.benefitTypeIdFilterItems))
@@ -127,6 +141,9 @@ const isSelectedFilter = (filter) => {
       filter.surnameFilter.length ||
       filter.postcodeFilter.length ||
       filter.niNumberFilter.length ||
+      filter.employerFilter.length ||
+      filter.staffNumberFilter.length ||
+      filter.balanceFilter.length ||
       filter.benefitTypeIdFilterItems.length
 }
 const buildCategory = (text, filter) => {

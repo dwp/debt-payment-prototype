@@ -18,18 +18,18 @@
   <form class="form" action="/filter" method="post">
 
     <h1 class="govuk-heading-xl">
-      Search results
+      Employer search results
     </h1>
 
 <!-- start search criteria -->
     <p class="govuk-body">Your search:</p>
         <ul class="govuk-list govuk-list--bullet">
-          <li>Employer company name: <span class="govuk-!-font-weight-bold">ASDA Stores Ltd</span></li>
+          <li>Employer name: <span class="govuk-!-font-weight-bold">ASDA Stores Ltd</span></li>
           <li>Employee staff reference: <span class="govuk-!-font-weight-bold">039876</span></li>
           <li>First name: <span class="govuk-!-font-weight-bold">J</span></li>
           <li>Last name: <span class="govuk-!-font-weight-bold">Williams</span></li>
           <li>National Insurance number: <span class="govuk-!-font-weight-bold">KL483920C</span></li>
-          <li>Balance: <span class="govuk-!-font-weight-bold">£255.73</span></li>
+          <li>VRA balance: <span class="govuk-!-font-weight-bold">£255.73</span></li>
         </ul>
       </p>
         
@@ -79,6 +79,20 @@
             },
             value: niNumber
           }) }}
+
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+          {#  Employer        #}
+          {{ govukInput({
+            id: 'employer',
+            name: 'employer',
+            label: {
+              text: 'Employer',
+              classes: 'govuk-label--s'
+            },
+            value: employer
+          }) }}
+
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
           {#  Postcode        #}
@@ -90,7 +104,21 @@
               classes: 'govuk-label--s'
             },
             value: postcode
-          }) }}
+          }) }}       
+          
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+
+          {#  Staff number        #}
+          {{ govukInput({
+            id: 'staffNumber',
+            name: 'staffNumber',
+            label: {
+              text: 'Employee staff reference',
+              classes: 'govuk-label--s'
+            },
+            value: staffNumber
+          }) }}       
           
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
@@ -100,7 +128,7 @@
             id: 'balance',
             name: 'balance',
             label: {
-              text: 'Balance',
+              text: 'VRA balance',
               classes: 'govuk-label--s'
             },
             prefix: {
@@ -109,7 +137,7 @@
             value: balance
           }) }}
 
-          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+          <!-- <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
           {#  DEA type       #}
           {{ govukRadios({
@@ -123,7 +151,7 @@
               }
             },
             items: benefitTypeIds
-          }) }}
+          }) }} -->
 
 <!--  filter - fields -->
 
@@ -192,19 +220,39 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Employer company name
+                    Current employer
                   </dt>
                   <dd class="govuk-summary-list__value">
-                    {{ result.employer }}
+                     {{ result.employer }} <br>
+                    {{ result.employerAddress }} {{ result.postcode }}
                   </dd>
                 </div>
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Employer postcode
+                    Current employee staff reference
                   </dt>
                   <dd class="govuk-summary-list__value">
-                    {{ result.postcode }}
+                    {{ result.staffNumber }}
+                  </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Previous employer
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{ result.employerOld }}  <br>
+                    {{ result.employerAddressOld }}
+                  </dd>
+                </div>
+
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Previous employee staff reference
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{ result.staffNumberOld  }}
                   </dd>
                 </div>
 
@@ -216,39 +264,7 @@
                     £{{ result.vraBalance }}
                   </dd>
                 </div>
-        
-      {% if  (data['{{ result.firstName }}'] == "John") %}
-              <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  IND balance
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list govuk-list--bullet">
-                    <li>£155.73</li>
-                    <li>£100</li>
-                  </ul>
-                </dd>
-              </div>          
-      {% else %}
-              <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  IND balance
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  £{{ result.indBalance }}
-                </dd>
-              </div>
-      {% endif %}
-
-
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Description
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ result.description }}
-                  </dd>
-                </div>
+      
 
               </dl>
 
