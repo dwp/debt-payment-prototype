@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-  <form class="form" action="/filter" method="post">
+  <form class="form" action="" method="post">
 
     <h1 class="govuk-heading-xl">
       Employer search results
@@ -25,8 +25,8 @@
     <p class="govuk-body">Your search:</p>
         <ul class="govuk-list govuk-list--bullet">
           <li>Employer name: <span class="govuk-!-font-weight-bold">TESCO Stores Ltd</span></li>
-          <li>Employee staff reference: <span class="govuk-!-font-weight-bold">039876</span></li>
-          <li>Last name: <span class="govuk-!-font-weight-bold">Williams</span></li>
+          <li>First name: <span class="govuk-!-font-weight-bold">John (match exactly)</span> </li> 
+          <li>National Insurance number: <span class="govuk-!-font-weight-bold">4839</span></li>
         </ul>
       </p>
         
@@ -188,18 +188,17 @@
 <!--  filter - results -->
       <div class="govuk-grid-column-two-thirds">
         <h2 class="govuk-heading-m">
-          {{ count }} customer records
+          25 customer records
         </h2>
 
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
         
-        {% for result in results %}
 
           <div class="govuk-summary-card">
 
             <div class="govuk-summary-card__title-wrapper">
               <h2 class="govuk-summary-card__title">
-                {{ result.firstName + ' ' + result.surname }}
+                John Williams
               </h2>
             </div>
 
@@ -211,7 +210,7 @@
                     National Insurance number
                   </dt>
                   <dd class="govuk-summary-list__value">
-                    {{ result.niNumber }}
+                    JZ483909D
                   </dd>
                 </div>
 
@@ -220,8 +219,8 @@
                     Current employer
                   </dt>
                   <dd class="govuk-summary-list__value">
-                     {{ result.employer }} <br>
-                    {{ result.employerAddress }} {{ result.postcode }}
+                    TESCO Stores Ltd <br>
+                    BR6 8AE
                   </dd>
                 </div>
 
@@ -230,7 +229,7 @@
                     Current employee staff reference
                   </dt>
                   <dd class="govuk-summary-list__value">
-                    {{ result.staffNumber }}
+                    No current employee staff reference
                   </dd>
                 </div>
 
@@ -239,8 +238,7 @@
                     Previous employer
                   </dt>
                   <dd class="govuk-summary-list__value">
-                    {{ result.employerOld }}  <br>
-                    {{ result.employerAddressOld }}
+                   No previous employer details
                   </dd>
                 </div>
 
@@ -249,7 +247,7 @@
                     Previous employee staff reference
                   </dt>
                   <dd class="govuk-summary-list__value">
-                    {{ result.staffNumberOld  }}
+                    No previous employee staff reference
                   </dd>
                 </div>
 
@@ -258,7 +256,7 @@
                     VRA balance
                   </dt>
                   <dd class="govuk-summary-list__value">
-                    £{{ result.vraBalance }}
+                    £255.75
                   </dd>
                 </div>
       
@@ -267,7 +265,6 @@
 
             </div>
           </div>
-        {% endfor %}
 
 <!-- start pagination -->
 <nav class="govuk-pagination" aria-label="Pagination">
