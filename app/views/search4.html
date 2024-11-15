@@ -115,6 +115,10 @@ What do you want to search? – {{ serviceName }} – GOV.UK Prototype Kit
   <script type="text/javascript">
 
     var results = [
+    'Tesco Stores Ltd',
+    'Tesco Bank',
+    'Tesco Mobile Limited',
+    'Tesco plc',
     'Johnston Compressors Ltd',
     'Hadfield Cars Ltd',
     'Ashton Removals Ltd',
@@ -172,7 +176,7 @@ What do you want to search? – {{ serviceName }} – GOV.UK Prototype Kit
       element: element,
       id: "searchHosp",
       name: "search-results",
-      minLength: 2,
+      minLength: 3,
       source: results,
       confirmOnBlur: false,
       onConfirm: ((hosp) => {
