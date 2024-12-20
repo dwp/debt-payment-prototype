@@ -15,23 +15,31 @@
 {% endblock %}
 
 {% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full-width">
+
   <form class="form" action="" method="post">
 
     <h1 class="govuk-heading-xl">
-      Employer search results
+      Customer search results
     </h1>
 
 <!-- start search criteria -->
     <p class="govuk-body">Your search:</p>
         <ul class="govuk-list govuk-list--bullet">
-          <li>Employer name: <span class="govuk-!-font-weight-bold">Tesco</span></li>
-          <li>First name: <span class="govuk-!-font-weight-bold">Jo</span></li>
+          <li>Employer name: <span class="govuk-!-font-weight-bold">TESCO Stores Ltd</span></li>
+          <li>First name: <span class="govuk-!-font-weight-bold">John </span> </li> 
         </ul>
       </p>
         
       <p class="govuk-body">
           <a href="javascript:window.history.back()" class="govuk-link">Change search</a>
       </p>
+
+    </div>
+</div>
+
 <!-- end search criteria -->
 
         <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
@@ -124,7 +132,7 @@
             id: 'balance',
             name: 'balance',
             label: {
-              text: 'VRA balance',
+              text: 'Amount outstanding',
               classes: 'govuk-label--s'
             },
             prefix: {
@@ -133,9 +141,23 @@
             value: balance
           }) }}
 
-          <!-- <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
-          {#  DEA type       #}
+          {#  Balance        #}
+          {{ govukInput({
+            id: 'balance',
+            name: 'balance',
+            label: {
+              text: 'Individual balance',
+              classes: 'govuk-label--s'
+            },
+            prefix: {
+              text: "£"
+            },
+            value: indbalance
+          }) }}
+
+          <!-- {#  DEA type       #}
           {{ govukRadios({
             idPrefix: 'benefit-type-id',
             name: 'benefitTypeId',
@@ -187,20 +209,118 @@
 <!--  filter - results -->
       <div class="govuk-grid-column-two-thirds">
         <h2 class="govuk-heading-m">
-          0 customer records
+          25 customer records
         </h2>
 
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
         
-        <p>No customer records match your search.</p>
 
-        <p>You may need to:</p>
-        <ul class="govuk-list govuk-list--bullet">
-          <li>change your search</li>
-          <li>clear filters you've selected</li>
-        </ul>
-       
-    </div>
+  <!-- start customer record -->
+
+  
+
+
+  <table class="govuk-table" >
+
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row govuk-!-font-size-16">
+  
+        <th scope="col" class="govuk-table__header" aria-sort="ascending">Name</th>
+  
+        <th scope="col" class="govuk-table__header" aria-sort="none">National Insurance number</th>
+
+        <th scope="col" class="govuk-table__header" aria-sort="none">Router account number</th>
+  
+        <th scope="col" class="govuk-table__header" aria-sort="none">Current employer</th>
+  
+        <th scope="col" class="govuk-table__header" aria-sort="none">Current employee number</th>
+  
+        <th scope="col" class="govuk-table__header" aria-sort="none">Previous employer</th>
+
+        <th scope="col" class="govuk-table__header" aria-sort="none">Previous employee number</th>
+
+        <th scope="col" class="govuk-table__header" aria-sort="none">Amount outstanding</th>
+
+        <th scope="col" class="govuk-table__header" aria-sort="none">Individual balance</th>
+
+
+
+
+      </tr>
+    </thead>
+  
+    <tbody class="govuk-table__body">
+  
+      <tr class="govuk-table__row govuk-!-font-size-16">
+  
+        <td class="govuk-table__cell">John Williams</td>
+  
+        <td class="govuk-table__cell" data-sort-value="6961">JZ29384D</td>
+
+        <td class="govuk-table__cell" data-sort-value="6961">29485577</td>
+  
+        <td class="govuk-table__cell">Tesco Stores Ltd,
+          26A Linden Avenue, Old Basing, RG24 7HG</td>
+  
+        <td class="govuk-table__cell" data-sort-value="1897">1897</td>
+
+        <td class="govuk-table__cell" data-sort-value="1897">Tesco Stores Ltd,
+          26A Linden Avenue, Old Basing, RG24 7HG</td>
+
+        <td class="govuk-table__cell" data-sort-value="1897">No previous employee number</td>
+
+        <td class="govuk-table__cell" data-sort-value="1897">£357</td>
+
+        <td class="govuk-table__cell " data-sort-value="1897"><ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
+          <li>£300</li>
+          <li>£57</li>
+        </ul></td>
+
+  
+      </tr>
+
+     
+  
+     
+  
+    </tbody>
+  </table>
+  
+
+
+
+<!-- start pagination -->
+<nav class="govuk-pagination" aria-label="Pagination">
+  <ul class="govuk-pagination__list">
+    <li class="govuk-pagination__item govuk-pagination__item--current">
+      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1" aria-current="page">
+        1
+      </a>
+    </li>
+    <li class="govuk-pagination__item">
+      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2">
+        2
+      </a>
+    </li>
+    <li class="govuk-pagination__item">
+      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
+        3
+      </a>
+    </li>
+  </ul>
+  <div class="govuk-pagination__next">
+    <a class="govuk-link govuk-pagination__link" href="#" rel="next">
+      <span class="govuk-pagination__link-title">
+        Next<span class="govuk-visually-hidden"> page</span>
+      </span>
+      <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+        <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+      </svg>
+    </a>
+  </div>
+</nav>
+<!-- end pagination -->
+      </div>
 <!-- end filter - results -->
 
 

@@ -1,4 +1,4 @@
-const benefitTypeIdOptions = ['Hardship', 'Payment monitoring']
+const benefitTypeIdOptions = ['[Benefit type]', '[Benefit type]']
 // TODO - To update this function when a new field has been added
 const filterCustomers = (query, customers) => {
   let filteredCustomers= customers
@@ -66,7 +66,7 @@ const buildSelectedFilters = (filter) => {
     categories.push(buildCategory('Employee staff reference', filter.staffNumberFilter))
   }
   if (filter.balanceFilter.length) {
-    categories.push(buildCategory('VRA balance', filter.balanceFilter))
+    categories.push(buildCategory('Amount outstanding', filter.balanceFilter))
   }
   if (filter.benefitTypeIdFilterItems.length) {
     categories.push(buildCategory('Benefit type ID', filter.benefitTypeIdFilterItems))
