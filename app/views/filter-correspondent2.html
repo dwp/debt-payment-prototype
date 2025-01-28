@@ -24,9 +24,7 @@
 <!-- start search criteria -->
     <p class="govuk-body">Your search:</p>
         <ul class="govuk-list govuk-list--bullet">
-          <li>First name: <b>John</b></li>
-          <li>Last name: <b>Abbott</b></li>
-
+          <li>Solicitor or executor name: <b>Bury and Williams LLP</b></li>
         </ul>
       </p>
         
@@ -49,7 +47,7 @@
             id: 'name',
             name: 'name',
             label: {
-              text: 'Next of kin first name',
+              text: 'Solicitor or executor name',
               classes: 'govuk-label--s'
             },
             value: employer
@@ -57,18 +55,6 @@
 
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
-          {#  Name        #}
-          {{ govukInput({
-            id: 'name',
-            name: 'name',
-            label: {
-              text: 'Next of kin last name',
-              classes: 'govuk-label--s'
-            },
-            value: employer
-          }) }}
-
-          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
           <!-- {#  Name        #}
           {{ govukInput({
@@ -128,7 +114,7 @@
 <!--  filter - results -->
       <div class="govuk-grid-column-two-thirds">
         <h2 class="govuk-heading-m">
-          1 correspondent record
+          2 correspondent records
         </h2>
 
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
@@ -139,7 +125,7 @@
 
   <div class="govuk-summary-card__title-wrapper">
     <h2 class="govuk-summary-card__title">
-      John Abbott
+      Bury and Williams LLP
     </h2>
   </div>
 
@@ -158,7 +144,7 @@
 
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Next of kin for
+          Solicitor for
         </dt>
         <dd class="govuk-summary-list__value">
           Sam Smith
@@ -202,7 +188,7 @@
 <!-- end customer record -->
 
 <!-- start customer record -->
-<!-- <div class="govuk-summary-card">
+<div class="govuk-summary-card">
 
   <div class="govuk-summary-card__title-wrapper">
     <h2 class="govuk-summary-card__title">
@@ -219,32 +205,52 @@
           Address
         </dt>
         <dd class="govuk-summary-list__value">
-          32 Oxford Street, Bradford, BD4 7DF
+          26A Linden Avenue, Old Basing, RG24 7HG
         </dd>
       </div>
 
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Solicitor for
+          Executor for
         </dt>
         <dd class="govuk-summary-list__value">
-          Liam Collins
+          Neil Jones
         </dd>
       </div>
 
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Liam Collin's National Insurance number
+          Neil Jones's National Insurance number
         </dt>
         <dd class="govuk-summary-list__value">
-          KL448909A
+          PF448909D
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Amount outstanding
+        </dt>
+        <dd class="govuk-summary-list__value">
+          £3,098.64
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Individual balance
+        </dt>
+        <dd class="govuk-summary-list__value ">
+          <ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
+            <li> £3,098.64 (Universal Credit)</li>
+          </ul>
         </dd>
       </div>
 
     </dl>
 
   </div>
-</div> -->
+</div>
 <!-- end customer record -->
 
 
