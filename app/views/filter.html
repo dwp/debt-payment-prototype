@@ -151,7 +151,19 @@
 
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
-          {#  DEA type       #}
+          {#  Benefit type        #}
+          {{ govukInput({
+            id: 'benefit-type-id',
+            name: 'benefitTypeId',
+            label: {
+              text: 'Benefit type',
+              classes: 'govuk-label--s'
+            }
+          }) }}
+
+   
+
+          <!-- {#  DEA type       #}
           {{ govukCheckboxes({
             idPrefix: 'benefit-type-id',
             name: 'benefitTypeId',
@@ -163,7 +175,7 @@
               }
             },
             items: benefitTypeIds
-          }) }}
+          }) }} -->
 
 <!--  filter - fields -->
 
@@ -293,18 +305,9 @@
         </dt>
         <dd class="govuk-summary-list__value ">
           <ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
-            <li>£460</li>
-            <li>£7.89</li>
+            <li>£460 (Carers Allowance)</li>
+            <li>£7.89 (Sickness Benefit)</li>
           </ul>
-        </dd>
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          [Benefit type]
-        </dt>
-        <dd class="govuk-summary-list__value ">
-   
         </dd>
       </div>
 

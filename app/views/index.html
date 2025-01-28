@@ -24,10 +24,22 @@
     </h2> 
 
 
-      {{ govukButton({
-          text: "Start",
-          href: "/home"
-        }) }}
+      
+        {% from "govuk/components/button/macro.njk" import govukButton %}
+
+<div class="govuk-button-group">
+  {{ govukButton({
+    text: "Current design - list view",
+    href: "/home"
+  }) }}
+
+
+  {{ govukButton({
+    text: "Design 2 - table view",
+    href: "/home2",
+    classes: "govuk-button--secondary"
+  }) }}
+</div>
 
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
