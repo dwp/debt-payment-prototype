@@ -2,7 +2,7 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-What do you want to search? – {{ serviceName }} – GOV.UK Prototype Kit
+Correspondent search – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block beforeContent %}
@@ -19,33 +19,16 @@ What do you want to search? – {{ serviceName }} – GOV.UK Prototype Kit
       <div class="govuk-grid-column-two-thirds">
        
 
-        <h1 class="govuk-heading-xl">Correspondent search</h1>
-
-        <h2 class="govuk-heading-m">Next of kin details</h2>
-
         <div class="govuk-form-group">
-          <label class="govuk-label" for="width-20">
-            First name
-          </label>
-          <input class="govuk-input govuk-input--width-20" id="width-20" name="width20" type="text">
-        </div>
-
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="width-20">
-            Last name
-          </label>
-          <input class="govuk-input govuk-input--width-20" id="width-20" name="width20" type="text">
-        </div>
-        
-        <br>
-
-        <h2 class="govuk-heading-m">Solicitor or executor details</h2>
-
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="width-20">
-            Full name
-          </label>
-          <input class="govuk-input govuk-input--width-20" id="width-20" name="width20" type="text">
+          <h1 class="govuk-label-wrapper">
+            <label class="govuk-label govuk-label--xl" for="event-name">
+              Correspondent search
+            </label>
+          </h1>
+          <div id="event-name-hint" class="govuk-hint">
+            Enter correspondent name
+          </div>
+          <input class="govuk-input govuk-input--width-20" id="event-name" name="eventName" type="text">
         </div>
 
 

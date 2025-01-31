@@ -24,7 +24,9 @@
 <!-- start search criteria -->
     <p class="govuk-body">Your search:</p>
         <ul class="govuk-list govuk-list--bullet">
-          <li>Name: <b>Williams</b></li>
+          <li>First name: <b>John</b></li>
+          <li>Last name: <b>Abbott</b></li>
+
         </ul>
       </p>
         
@@ -40,27 +42,18 @@
       <div class="govuk-grid-column-one-third">
         {%- set filterOptionsHtml %}
 
-        {{ govukRadios({
-          idPrefix: 'benefit-type-id',
-          name: 'benefitTypeId',
-          classes: "govuk-radios--small",
-          fieldset: {
-            legend: {
-              text: 'Correspondent type',
-              classes: 'govuk-fieldset__legend--s'
-            }
-          },
-          items: [
-          {
-            value: "person",
-            text: "Person"
-          },
-          {
-            value: "company",
-            text: "Company"
-          }
-        ]
-        }) }} 
+
+
+          {#  Name        #}
+          {{ govukInput({
+            id: 'name',
+            name: 'name',
+            label: {
+              text: 'Next of kin first name',
+              classes: 'govuk-label--s'
+            },
+            value: employer
+          }) }}
 
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
@@ -69,7 +62,7 @@
             id: 'name',
             name: 'name',
             label: {
-              text: 'Correspondent name',
+              text: 'Next of kin last name',
               classes: 'govuk-label--s'
             },
             value: employer
@@ -77,6 +70,18 @@
 
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
+          <!-- {#  Name        #}
+          {{ govukInput({
+            id: 'name',
+            name: 'name',
+            label: {
+              text: '[Solicitor/executor name?]',
+              classes: 'govuk-label--s'
+            },
+            value: employer
+          }) }}
+
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible"> -->
 
           {#  Name        #}
           {{ govukInput({
@@ -96,7 +101,7 @@
             id: 'name',
             name: 'name',
             label: {
-              text: "Customer's National Insurance number",
+              text: 'Customer National Insurance number',
               classes: 'govuk-label--s'
             },
             value: employer
@@ -123,7 +128,7 @@
 <!--  filter - results -->
       <div class="govuk-grid-column-two-thirds">
         <h2 class="govuk-heading-m">
-          3 correspondent records
+          1 correspondent record
         </h2>
 
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
@@ -134,73 +139,7 @@
 
   <div class="govuk-summary-card__title-wrapper">
     <h2 class="govuk-summary-card__title">
-      John Williams
-    </h2>
-  </div>
-
-  <div class="govuk-summary-card__content ">
-
-    <dl class="govuk-summary-list govuk-!-font-size-16">
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Address
-        </dt>
-        <dd class="govuk-summary-list__value">
-          15 Station Road, Coventry, CV1 3EE
-        </dd>
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Correspondent for
-        </dt>
-        <dd class="govuk-summary-list__value">
-          Katy Fisher
-        </dd>
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Customer's National Insurance number
-        </dt>
-        <dd class="govuk-summary-list__value">
-          FJ448909D
-        </dd>
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Amount outstanding
-        </dt>
-        <dd class="govuk-summary-list__value">
-          £12,456.98
-        </dd>
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Individual balance
-        </dt>
-        <dd class="govuk-summary-list__value ">
-          <ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
-            <li>£12,456.98 (Sickness Benefit)</li>
-          </ul>
-        </dd>
-      </div>
-
-    </dl>
-
-  </div>
-</div>
-<!-- end customer record -->
-
-<!-- start customer record -->
-<div class="govuk-summary-card">
-
-  <div class="govuk-summary-card__title-wrapper">
-    <h2 class="govuk-summary-card__title">
-      Bury and Williams LLP
+      John Abbott
     </h2>
   </div>
 
@@ -219,7 +158,7 @@
 
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Correspondent for
+          Next of kin for
         </dt>
         <dd class="govuk-summary-list__value">
           Sam Smith
@@ -228,10 +167,10 @@
 
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Customer's National Insurance number
+          Sam Smith's National Insurance number
         </dt>
         <dd class="govuk-summary-list__value">
-          DR448909B
+          JZ448909A
         </dd>
       </div>
 
@@ -240,7 +179,7 @@
           Amount outstanding
         </dt>
         <dd class="govuk-summary-list__value">
-          £478
+          £467.89
         </dd>
       </div>
 
@@ -250,7 +189,8 @@
         </dt>
         <dd class="govuk-summary-list__value ">
           <ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
-            <li>£478 (Carers Allowance)</li>
+            <li>£460 (Carers Allowance)</li>
+            <li>£7.89 (Sickness Benefit)</li>
           </ul>
         </dd>
       </div>
@@ -262,7 +202,7 @@
 <!-- end customer record -->
 
 <!-- start customer record -->
-<div class="govuk-summary-card">
+<!-- <div class="govuk-summary-card">
 
   <div class="govuk-summary-card__title-wrapper">
     <h2 class="govuk-summary-card__title">
@@ -279,52 +219,32 @@
           Address
         </dt>
         <dd class="govuk-summary-list__value">
-          26A Linden Avenue, Old Basing, RG24 7HG
+          32 Oxford Street, Bradford, BD4 7DF
         </dd>
       </div>
 
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Correspondent for
+          Solicitor for
         </dt>
         <dd class="govuk-summary-list__value">
-          Neil Jones
+          Liam Collins
         </dd>
       </div>
 
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Customer's National Insurance number
+          Liam Collin's National Insurance number
         </dt>
         <dd class="govuk-summary-list__value">
-          PF448909D
-        </dd>
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Amount outstanding
-        </dt>
-        <dd class="govuk-summary-list__value">
-          £3,098.64
-        </dd>
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Individual balance
-        </dt>
-        <dd class="govuk-summary-list__value ">
-          <ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
-            <li> £3,098.64 (Universal Credit)</li>
-          </ul>
+          KL448909A
         </dd>
       </div>
 
     </dl>
 
   </div>
-</div>
+</div> -->
 <!-- end customer record -->
 
 
