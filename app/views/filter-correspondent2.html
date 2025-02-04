@@ -18,13 +18,13 @@
   <form class="form" action="" method="post">
 
     <h1 class="govuk-heading-xl">
-      Correspondent search results
+      Customer search results
     </h1>
 
 <!-- start search criteria -->
     <p class="govuk-body">Your search:</p>
         <ul class="govuk-list govuk-list--bullet">
-          <li>Solicitor or executor name: <b>Bury and Williams LLP</b></li>
+          <li>Name: <span class="govuk-!-font-weight-bold">Williams</span></li>
         </ul>
       </p>
         
@@ -37,63 +37,101 @@
 
 <!--  filter - fields -->
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-third">
+      <div class="govuk-grid-column-full-width">
+
+    
         {%- set filterOptionsHtml %}
 
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-one-third">
 
 
+            {{ govukRadios({
+              idPrefix: 'benefit-type-id',
+              name: 'benefitTypeId',
+              classes: "govuk-radios--small govuk-radios--inline",
+              fieldset: {
+                legend: {
+                  text: 'Correspondent type',
+                  classes: 'govuk-fieldset__legend--s'
+                }
+              },
+              items: [
+              {
+                value: "person",
+                text: "Person"
+              },
+              {
+                value: "company",
+                text: "Company"
+              }
+            ]
+            }) }} 
+
+           
+
+        <br>
+
+          </div>
+
+          <div class="govuk-grid-column-one-third">
+
+            {#  Name        #}
+            {{ govukInput({
+              id: 'name',
+              name: 'name',
+              label: {
+                text: 'Correspondent name',
+                classes: 'govuk-label--s'
+              },
+              value: employer
+            }) }}
+
+           
+
+        <br>
+
+          </div>
+
+          <div class="govuk-grid-column-one-third">
+
+            {#  Name        #}
+            {{ govukInput({
+              id: 'name',
+              name: 'name',
+              label: {
+                text: 'Postcode',
+                classes: 'govuk-label--s'
+              },
+              value: employer
+            }) }}
+          
+           
+
+            <br><br>
+
+        </div>
+
+        <div class="govuk-grid-column-one-third">
+
+        
           {#  Name        #}
           {{ govukInput({
             id: 'name',
             name: 'name',
             label: {
-              text: 'Solicitor or executor name',
+              text: "Customer's National Insurance number",
               classes: 'govuk-label--s'
             },
             value: employer
           }) }}
+     
+          <br>
 
-          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+      </div>
 
+      {% endset -%}
 
-          <!-- {#  Name        #}
-          {{ govukInput({
-            id: 'name',
-            name: 'name',
-            label: {
-              text: '[Solicitor/executor name?]',
-              classes: 'govuk-label--s'
-            },
-            value: employer
-          }) }}
-
-          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible"> -->
-
-          {#  Name        #}
-          {{ govukInput({
-            id: 'name',
-            name: 'name',
-            label: {
-              text: 'Postcode',
-              classes: 'govuk-label--s'
-            },
-            value: employer
-          }) }}
-
-          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-
-          {#  Name        #}
-          {{ govukInput({
-            id: 'name',
-            name: 'name',
-            label: {
-              text: 'Customer National Insurance number',
-              classes: 'govuk-label--s'
-            },
-            value: employer
-          }) }}
-
-        {% endset -%}
 
 <!-- filter - selection -->
         {{ mojFilter({
@@ -109,186 +147,92 @@
           optionsHtml: filterOptionsHtml
         }) }}
 <!-- filter - selection -->
+
       </div>
 
 <!--  filter - results -->
-      <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-grid-column-full-width govuk-!-margin-top-7">
         <h2 class="govuk-heading-m">
-          2 correspondent records
+          2 customer records
         </h2>
 
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+        <!-- start customer record -->
+        <table class="govuk-table" >
+
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row govuk-!-font-size-16">
+        
+              <th scope="col" class="govuk-table__header" aria-sort="ascending">Name</th>
+        
+              <th scope="col" class="govuk-table__header" aria-sort="none">Address</th>
+
+              <th scope="col" class="govuk-table__header" aria-sort="none">Correspondent for</th>
+        
+              <th scope="col" class="govuk-table__header" aria-sort="none">Customer's National Insurance number</th>
+        
+              <th scope="col" class="govuk-table__header" aria-sort="none">Amount outstanding</th>
+        
+              <th scope="col" class="govuk-table__header" style="width:20%" aria-sort="none">Individual balance</th>
+
+
+
+
+            </tr>
+          </thead>
+        
+          <tbody class="govuk-table__body">
+        
+            <tr class="govuk-table__row govuk-!-font-size-16">
+        
+              <td class="govuk-table__cell">John Williams</td>
+        
+              <td class="govuk-table__cell">15 Station Road, Coventry, CV1 3EE</td>
+
+              <td class="govuk-table__cell">Katy Fisher</td>
+        
+              <td class="govuk-table__cell">FJ448909D</td>
+        
+              <td class="govuk-table__cell" data-sort-value="1897">	£12,456.98</td>
+
+              <td class="govuk-table__cell " data-sort-value="1897"><ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
+                <li>£4,569.44 (Sickness Benefit)</li>
+                <li>£4,788.90 (Carers Allowance)</li>
+                <li>£3,098.64 (Universal Credit)</li>
+              </ul></td>
+
+        
+            </tr>
+
+           
+            <tr class="govuk-table__row govuk-!-font-size-16">
+        
+              <td class="govuk-table__cell">Bury and Williams LLP</td>
+        
+              <td class="govuk-table__cell">26A Linden Avenue, Old Basing, RG24 7HG</td>
+
+              <td class="govuk-table__cell">Sam Smith</td>
+        
+              <td class="govuk-table__cell">DR448909B</td>
+        
+              <td class="govuk-table__cell" data-sort-value="1897">	£478</td>
+
+              <td class="govuk-table__cell " data-sort-value="1897"><ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
+                <li>£478 (Sickness Benefit)</li>
+              </ul></td>
+
+        
+            </tr>
+           
+        
+          </tbody>
+        </table>
         
 
- <!-- start customer record -->
-<div class="govuk-summary-card">
-
-  <div class="govuk-summary-card__title-wrapper">
-    <h2 class="govuk-summary-card__title">
-      Bury and Williams LLP
-    </h2>
-  </div>
-
-  <div class="govuk-summary-card__content ">
-
-    <dl class="govuk-summary-list govuk-!-font-size-16">
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Address
-        </dt>
-        <dd class="govuk-summary-list__value">
-          26A Linden Avenue, Old Basing, RG24 7HG
-        </dd>
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Solicitor for
-        </dt>
-        <dd class="govuk-summary-list__value">
-          Sam Smith
-        </dd>
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Sam Smith's National Insurance number
-        </dt>
-        <dd class="govuk-summary-list__value">
-          JZ448909A
-        </dd>
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Amount outstanding
-        </dt>
-        <dd class="govuk-summary-list__value">
-          £467.89
-        </dd>
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Individual balance
-        </dt>
-        <dd class="govuk-summary-list__value ">
-          <ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
-            <li>£460 (Carers Allowance)</li>
-            <li>£7.89 (Sickness Benefit)</li>
-          </ul>
-        </dd>
-      </div>
-
-    </dl>
-
-  </div>
-</div>
-<!-- end customer record -->
-
-<!-- start customer record -->
-<div class="govuk-summary-card">
-
-  <div class="govuk-summary-card__title-wrapper">
-    <h2 class="govuk-summary-card__title">
-      Bury and Williams LLP
-    </h2>
-  </div>
-
-  <div class="govuk-summary-card__content ">
-
-    <dl class="govuk-summary-list govuk-!-font-size-16">
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Address
-        </dt>
-        <dd class="govuk-summary-list__value">
-          26A Linden Avenue, Old Basing, RG24 7HG
-        </dd>
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Executor for
-        </dt>
-        <dd class="govuk-summary-list__value">
-          Neil Jones
-        </dd>
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Neil Jones's National Insurance number
-        </dt>
-        <dd class="govuk-summary-list__value">
-          PF448909D
-        </dd>
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Amount outstanding
-        </dt>
-        <dd class="govuk-summary-list__value">
-          £3,098.64
-        </dd>
-      </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Individual balance
-        </dt>
-        <dd class="govuk-summary-list__value ">
-          <ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
-            <li> £3,098.64 (Universal Credit)</li>
-          </ul>
-        </dd>
-      </div>
-
-    </dl>
-
-  </div>
-</div>
-<!-- end customer record -->
 
 
 
-
-
-
-<!-- start pagination -->
-<!-- <nav class="govuk-pagination" aria-label="Pagination">
-  <ul class="govuk-pagination__list">
-    <li class="govuk-pagination__item govuk-pagination__item--current">
-      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1" aria-current="page">
-        1
-      </a>
-    </li>
-    <li class="govuk-pagination__item">
-      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2">
-        2
-      </a>
-    </li>
-    <li class="govuk-pagination__item">
-      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
-        3
-      </a>
-    </li>
-  </ul>
-  <div class="govuk-pagination__next">
-    <a class="govuk-link govuk-pagination__link" href="#" rel="next">
-      <span class="govuk-pagination__link-title">
-        Next<span class="govuk-visually-hidden"> page</span>
-      </span>
-      <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
-        <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
-      </svg>
-    </a>
-  </div>
-</nav> -->
-<!-- end pagination -->
       </div>
     </div>
 <!-- end filter - results -->

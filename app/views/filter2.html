@@ -46,43 +46,49 @@
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-one-third">
 
-        {{ govukInput({
-          label: {
-            text: "First name"
-          },
-          classes: "govuk-input--width-20" ,
-          id: "width-20",
-          name: "width20"
-        }) }}
-
-        <br>
-
-          </div>
-
-          <div class="govuk-grid-column-one-third">
-
-        {{ govukInput({
-          label: {
-            text: "Last name"
-          },
-          classes: "govuk-input--width-20",
-          id: "width-20",
-          name: "width20"
-        }) }}
-
-        <br>
-
-          </div>
-
-          <div class="govuk-grid-column-one-third">
-
+        {#  Name        #}
             {{ govukInput({
+              id: 'name',
+              name: 'name',
               label: {
-                text: "National Insurance number"
+                text: 'First name',
+                classes: 'govuk-label--s'
               },
-              classes: "govuk-input--width-20",
-              id: "width-20",
-              name: "width20"
+              value: employer
+            }) }}
+
+        <br>
+
+          </div>
+
+          <div class="govuk-grid-column-one-third">
+
+        {#  Name        #}
+            {{ govukInput({
+              id: 'name',
+              name: 'name',
+              label: {
+                text: 'Last name',
+                classes: 'govuk-label--s'
+              },
+              value: employer
+            }) }}
+
+        <br>
+
+          </div>
+
+          <div class="govuk-grid-column-one-third">
+
+            {#  Name        #}
+            {{ govukInput({
+              id: 'name',
+              name: 'name',
+              label: {
+                text: 'National Insurance number',
+                classes: 'govuk-label--s'
+              },
+              value: employer
             }) }}
 
             <br>
@@ -91,14 +97,17 @@
 
         <div class="govuk-grid-column-one-third">
 
-          {{ govukInput({
-            label: {
-              text: "Employer"
-            },
-            classes: "govuk-input--width-20",
-            id: "width-20",
-            name: "width20"
-          }) }}
+          {#  Name        #}
+            {{ govukInput({
+              id: 'name',
+              name: 'name',
+              label: {
+                text: 'Employer',
+                classes: 'govuk-label--s'
+              },
+              value: employer
+            }) }}
+          
 
           <br>
 
@@ -106,13 +115,15 @@
 
         <div class="govuk-grid-column-one-third">
 
+          {#  Name        #}
           {{ govukInput({
+            id: 'name',
+            name: 'name',
             label: {
-              text: "Postcode"
+              text: 'Postcode',
+              classes: 'govuk-label--s'
             },
-            classes: "govuk-input--width-20",
-            id: "width-20",
-            name: "width20"
+            value: employer
           }) }}
 
           <br>
@@ -121,13 +132,15 @@
 
       <div class="govuk-grid-column-one-third">
 
+        {#  Name        #}
         {{ govukInput({
+          id: 'name',
+          name: 'name',
           label: {
-            text: "Employee number"
+            text: 'Employee number',
+            classes: 'govuk-label--s'
           },
-          classes: "govuk-input--width-20",
-          id: "width-20",
-          name: "width20"
+          value: employer
         }) }}
 
         <br>
@@ -136,13 +149,15 @@
           
     <div class="govuk-grid-column-one-third">
 
+      {#  Name        #}
       {{ govukInput({
+        id: 'name',
+        name: 'name',
         label: {
-          text: "Amount outstanding"
+          text: 'Amount outstanding',
+          classes: 'govuk-label--s'
         },
-        classes: "govuk-input--width-20",
-        id: "width-20",
-        name: "width20"
+        value: employer
       }) }}
 
       <br>
@@ -152,14 +167,16 @@
   <div class="govuk-grid-column-one-third">
 
 
-  {{ govukInput({
-    label: {
-      text: "Individual balance"
-    },
-    classes: "govuk-input--width-20",
-    id: "width-20",
-    name: "width20"
-  }) }}
+    {#  Name        #}
+    {{ govukInput({
+      id: 'name',
+      name: 'name',
+      label: {
+        text: 'Individual balance',
+        classes: 'govuk-label--s'
+      },
+      value: employer
+    }) }}
 
   <br>
 
@@ -167,14 +184,15 @@
 
 <div class="govuk-grid-column-one-third">
 
-
+  {#  Name        #}
   {{ govukInput({
+    id: 'name',
+    name: 'name',
     label: {
-      text: "Benefit type"
+      text: 'Benefit type',
+      classes: 'govuk-label--s'
     },
-    classes: "govuk-input--width-20",
-    id: "width-20",
-    name: "width20"
+    value: employer
   }) }}
 
   <br>
