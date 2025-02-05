@@ -40,184 +40,279 @@
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-full-width">
 
-    
-        {%- set filterOptionsHtml %}
 
-        <div class="govuk-grid-row">
-          <div class="govuk-grid-column-one-third">
 
-        {#  Name        #}
-            {{ govukInput({
-              id: 'name',
-              name: 'name',
-              label: {
-                text: 'First name',
-                classes: 'govuk-label--s'
-              },
-              value: employer
-            }) }}
+        <details class="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+              Filter results
+            </span>
+          </summary>
+          <div class="govuk-details__text">
 
-        <br>
+            <div class="moj-filter">
 
+              <div class="moj-filter__header">
+            
+                <div class="moj-filter__header-title">
+                  <h2 class="govuk-heading-m">Filter</h2>
+                </div>
+            
+                <div class="moj-filter__header-action">
+                  
+                </div>
+            
+              </div>
+            
+              <div class="moj-filter__content">
+            
+                
+  <!-- selected filters start -->
+                  <div class="moj-filter__selected">
+            
+                    <div class="moj-filter__selected-heading">
+            
+                      <div class="moj-filter__heading-title">
+                        <h2 class="govuk-heading-m">Selected filters</h2>
+                      </div>
+            
+                        <p><a class="govuk-link govuk-link--no-visited-state" href="">Clear filters</a></p>
+            
+                    </div>
+            
+                    
+                      <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Last name </h3>
+            
+                      <ul class="moj-filter-tags">
+                        
+                          <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> Williams</a></li>
+                        
+                        
+                      </ul>
+                    
+                      <h3 class="govuk-heading-s govuk-!-margin-bottom-0">National Insurance number</h3>
+            
+                      <ul class="moj-filter-tags">
+                        
+                          <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> 8876</a></li>
+                        
+                      </ul>
+                    
+                      <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Amount outstanding</h3>
+            
+                      <ul class="moj-filter-tags">
+                        
+                          <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> £2456.89</a></li>
+                        
+                      </ul>
+
+                      <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Postcode</h3>
+            
+                      <ul class="moj-filter-tags">
+                        
+                          <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> CV1</a></li>
+                        
+                      </ul>
+
+                  </div>
+                
+   <!-- selected filters end -->
+
+                <div class="moj-filter__options">
+            
+                  <div class="govuk-grid-row">
+                    <div class="govuk-grid-column-one-third">
+          
+                  {#  Name        #}
+                      {{ govukInput({
+                        id: 'name',
+                        name: 'name',
+                        label: {
+                          text: 'First name',
+                          classes: 'govuk-label--s'
+                        },
+                        value: employer
+                      }) }}
+          
+                  <br>
+          
+                    </div>
+          
+                    <div class="govuk-grid-column-one-third">
+          
+                  {#  Name        #}
+                      {{ govukInput({
+                        id: 'name',
+                        name: 'name',
+                        label: {
+                          text: 'Last name',
+                          classes: 'govuk-label--s'
+                        },
+                        value: employer
+                      }) }}
+          
+                  <br>
+          
+                    </div>
+          
+                    <div class="govuk-grid-column-one-third">
+          
+                      {#  Name        #}
+                      {{ govukInput({
+                        id: 'name',
+                        name: 'name',
+                        label: {
+                          text: 'National Insurance number',
+                          classes: 'govuk-label--s'
+                        },
+                        value: employer
+                      }) }}
+          
+                      <br>
+          
+                  </div>
+          
+                  <div class="govuk-grid-column-one-third">
+          
+                    {#  Name        #}
+                      {{ govukInput({
+                        id: 'name',
+                        name: 'name',
+                        label: {
+                          text: 'Employer',
+                          classes: 'govuk-label--s'
+                        },
+                        value: employer
+                      }) }}
+                    
+          
+                    <br>
+          
+                </div>
+          
+                  <div class="govuk-grid-column-one-third">
+          
+                    {#  Name        #}
+                    {{ govukInput({
+                      id: 'name',
+                      name: 'name',
+                      label: {
+                        text: 'Postcode',
+                        classes: 'govuk-label--s'
+                      },
+                      value: employer
+                    }) }}
+          
+                    <br>
+          
+                </div>   
+          
+                <div class="govuk-grid-column-one-third">
+          
+                  {#  Name        #}
+                  {{ govukInput({
+                    id: 'name',
+                    name: 'name',
+                    label: {
+                      text: 'Employee number',
+                      classes: 'govuk-label--s'
+                    },
+                    value: employer
+                  }) }}
+          
+                  <br>
+          
+              </div>      
+                    
+              <div class="govuk-grid-column-one-third">
+          
+                {#  Name        #}
+                {{ govukInput({
+                  id: 'name',
+                  name: 'name',
+                  label: {
+                    text: 'Amount outstanding',
+                    classes: 'govuk-label--s'
+                  },
+                  prefix: {
+                    text: "£"
+                  },
+                  value: employer
+                }) }}
+          
+                <br>
+          
+            </div>
+          
+            <div class="govuk-grid-column-one-third">
+          
+          
+              {#  Name        #}
+              {{ govukInput({
+                id: 'name',
+                name: 'name',
+                label: {
+                  text: 'Individual balance',
+                  classes: 'govuk-label--s'
+                },
+                prefix: {
+                  text: "£"
+                },
+                value: employer
+              }) }}
+          
+            <br>
+          
           </div>
-
+          
           <div class="govuk-grid-column-one-third">
-
-        {#  Name        #}
-            {{ govukInput({
-              id: 'name',
-              name: 'name',
-              label: {
-                text: 'Last name',
-                classes: 'govuk-label--s'
-              },
-              value: employer
-            }) }}
-
-        <br>
-
-          </div>
-
-          <div class="govuk-grid-column-one-third">
-
+          
             {#  Name        #}
             {{ govukInput({
               id: 'name',
               name: 'name',
               label: {
-                text: 'National Insurance number',
+                text: 'Benefit type',
                 classes: 'govuk-label--s'
               },
               value: employer
             }) }}
-
-            <br>
-
-        </div>
-
-        <div class="govuk-grid-column-one-third">
-
-          {#  Name        #}
-            {{ govukInput({
-              id: 'name',
-              name: 'name',
-              label: {
-                text: 'Employer',
-                classes: 'govuk-label--s'
-              },
-              value: employer
-            }) }}
+                                                
+                    <br>
           
+                    
+                </div>
 
-          <br>
+                <div class="govuk-grid-column-one-third">
+                  <button type="submit" class="govuk-button" data-module="govuk-button" data-test-id="submit-button" data-govuk-button-init="">
+                  Apply filters
+                </button> 
+                </div>
 
-      </div>
-
-        <div class="govuk-grid-column-one-third">
-
-          {#  Name        #}
-          {{ govukInput({
-            id: 'name',
-            name: 'name',
-            label: {
-              text: 'Postcode',
-              classes: 'govuk-label--s'
-            },
-            value: employer
-          }) }}
-
-          <br>
-
-      </div>   
-
-      <div class="govuk-grid-column-one-third">
-
-        {#  Name        #}
-        {{ govukInput({
-          id: 'name',
-          name: 'name',
-          label: {
-            text: 'Employee number',
-            classes: 'govuk-label--s'
-          },
-          value: employer
-        }) }}
-
-        <br>
-
-    </div>      
-          
-    <div class="govuk-grid-column-one-third">
-
-      {#  Name        #}
-      {{ govukInput({
-        id: 'name',
-        name: 'name',
-        label: {
-          text: 'Amount outstanding',
-          classes: 'govuk-label--s'
-        },
-        value: employer
-      }) }}
-
-      <br>
-
-  </div>
-
-  <div class="govuk-grid-column-one-third">
-
-
-    {#  Name        #}
-    {{ govukInput({
-      id: 'name',
-      name: 'name',
-      label: {
-        text: 'Individual balance',
-        classes: 'govuk-label--s'
-      },
-      value: employer
-    }) }}
-
-  <br>
-
-</div>
-
-<div class="govuk-grid-column-one-third">
-
-  {#  Name        #}
-  {{ govukInput({
-    id: 'name',
-    name: 'name',
-    label: {
-      text: 'Benefit type',
-      classes: 'govuk-label--s'
-    },
-    value: employer
-  }) }}
-
-  <br>
-
-</div>
-
-        {% endset -%}
+                  </div>
+            
+                </div>
+            
+              </div>
+            
+            </div>
         
 
+
 <!-- filter - selection -->
-        {{ mojFilter({
-          heading: {
-            text: 'Filter'
-          },
-          submit: {
-            attributes: {
-              "data-test-id": "submit-button"
-            }
-          },
-          selectedFilters: selectedFilters,
-          optionsHtml: filterOptionsHtml
-        }) }}
+
 <!-- filter - selection -->
 
       </div>
+
+          </div>
+        </details>
+
+
+
+
+
+        
 
 <!--  filter - results -->
       <div class="govuk-grid-column-full-width govuk-!-margin-top-7">
