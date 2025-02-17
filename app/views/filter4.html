@@ -42,7 +42,7 @@
 
 
 
-        <details class="govuk-details">
+        <details class="govuk-details" open>
           <summary class="govuk-details__summary">
             <span class="govuk-details__summary-text">
               Filter results
@@ -68,7 +68,7 @@
             
                 
   <!-- selected filters start -->
-                  <!-- <div class="moj-filter__selected">
+                  <div class="moj-filter__selected">
             
                     <div class="moj-filter__selected-heading">
             
@@ -85,36 +85,13 @@
             
                       <ul class="moj-filter-tags">
                         
-                          <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> Williams</a></li>
+                          <li><a class="moj-filter__tag" href="#" ><span class="govuk-visually-hidden">Remove this filter</span> Williams</a></li>
                         
                         
                       </ul>
                     
-                      <h3 class="govuk-heading-s govuk-!-margin-bottom-0">National Insurance <br> number</h3>
-            
-                      <ul class="moj-filter-tags">
-                        
-                          <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> 8876</a></li>
-                        
-                      </ul>
-                    
-                      <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Amount outstanding</h3>
-            
-                      <ul class="moj-filter-tags">
-                        
-                          <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> £2456.89</a></li>
-                        
-                      </ul>
 
-                      <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Postcode</h3>
-            
-                      <ul class="moj-filter-tags">
-                        
-                          <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> CV1</a></li>
-                        
-                      </ul>
-
-                  </div> -->
+                  </div>
                 
    <!-- selected filters end -->
 
@@ -144,11 +121,12 @@
                       {{ govukInput({
                         id: 'name',
                         name: 'name',
+                        value: 'Williams',
                         label: {
                           text: 'Last name',
                           classes: 'govuk-label--s'
                         },
-                        value: employer
+                        hint: Williams
                       }) }}
           
                   <br>
@@ -284,11 +262,9 @@
                 </div>
 
                 <div class="govuk-grid-column-one-third">
-                  
-                      {{ govukButton({
-                        text: "Apply filters",
-                        href: "/filter4"
-                      }) }}
+                  <button type="submit" class="govuk-button" data-module="govuk-button" data-test-id="submit-button" data-govuk-button-init="">
+                  Apply filters
+                </button> 
                 </div>
 
                   </div>
@@ -319,7 +295,7 @@
 <!--  filter - results -->
       <div class="govuk-grid-column-full-width govuk-!-margin-top-7">
         <h2 class="govuk-heading-m">
-          25 customer records
+          2 customer records
         </h2>
 
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
@@ -356,204 +332,12 @@
         
           <tbody class="govuk-table__body">
 
-      <!-- customer record start -->
-            <tr class="govuk-table__row govuk-!-font-size-16">
-        
-              <td class="govuk-table__cell">John Althorpe</td>
-        
-              <td class="govuk-table__cell" data-sort-value="6961">JZ293847D</td>
-
-              <td class="govuk-table__cell" data-sort-value="6961">29485577</td>
-        
-              <td class="govuk-table__cell">Tesco Stores Ltd,
-                26A Linden Avenue, Old Basing, RG24 7HG</td>
-        
-              <td class="govuk-table__cell" data-sort-value="1897">1897</td>
-
-              <td class="govuk-table__cell" data-sort-value="1897">Tesco Stores Ltd,
-                26A Linden Avenue, Old Basing, RG24 7HG</td>
-
-              <td class="govuk-table__cell" data-sort-value="1897">No previous employee number</td>
-
-              <td class="govuk-table__cell" data-sort-value="1897">£357</td>
-
-              <td class="govuk-table__cell " data-sort-value="1897"><ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
-                <li>£300 (Disability Working Allowance)</li>
-                <li>£57 (Universal Credit)</li>
-              </ul></td>
-
-            </tr>
-      <!-- customer record end -->
-           
-      <!-- customer record start -->
-      <tr class="govuk-table__row govuk-!-font-size-16">
-        
-        <td class="govuk-table__cell">John Apps</td>
-  
-        <td class="govuk-table__cell" data-sort-value="6961">RW293546D</td>
-
-        <td class="govuk-table__cell" data-sort-value="6961">38475663</td>
-  
-        <td class="govuk-table__cell">Tesco Stores Ltd,
-          26A Linden Avenue, Old Basing, RG24 7HG</td>
-  
-        <td class="govuk-table__cell" data-sort-value="1897">No current employee number</td>
-
-        <td class="govuk-table__cell" data-sort-value="1897">No previous employer details</td>
-
-        <td class="govuk-table__cell" data-sort-value="1897">No previous employee number</td>
-
-        <td class="govuk-table__cell" data-sort-value="1897">£13,456.78</td>
-
-        <td class="govuk-table__cell " data-sort-value="1897"><ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
-          <li>£13,456.78 (Universal Credit)</li>
-        </ul></td>
-
-      </tr>
-    <!-- customer record end -->
-
-    <!-- customer record start -->
-    <tr class="govuk-table__row govuk-!-font-size-16">
-        
-      <td class="govuk-table__cell">John Apps</td>
-
-      <td class="govuk-table__cell" data-sort-value="6961">SD669354B</td>
-
-      <td class="govuk-table__cell" data-sort-value="6961">29933303</td>
-
-      <td class="govuk-table__cell">Croydon Motors, Croydon, Greater London, CR0 8RE</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">No current employee number</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">Tesco Stores Ltd,
-        26A Linden Avenue, Old Basing, RG24 7HG</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">No previous employee number</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">£4,657</td>
-
-      <td class="govuk-table__cell " data-sort-value="1897"><ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
-        <li>£4,000 (Cost of Living Payment)</li>
-        <li>£600 (Cold Weather Payment)</li>
-        <li>£50.59 (Income Support)</li>
-        <li>£6.41 (Sickness Benefit)</li>
-      </ul></td>
-
-    </tr>
-  <!-- customer record end -->
-
-    <!-- customer record start -->
-    <tr class="govuk-table__row govuk-!-font-size-16">
-        
-      <td class="govuk-table__cell">John Array</td>
-
-      <td class="govuk-table__cell" data-sort-value="6961">WP643564B</td>
-
-      <td class="govuk-table__cell" data-sort-value="6961">29933303</td>
-
-      <td class="govuk-table__cell">No current employer details</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">No current employee number</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">Tesco Stores Ltd,
-        26A Linden Avenue, Old Basing, RG24 7HG</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">No previous employee number</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">£500.59</td>
-
-      <td class="govuk-table__cell " data-sort-value="1897"><ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
-        <li>£500.59 (Income Support)</li>
-      </ul></td>
-
-    </tr>
-  <!-- customer record end -->
-           
-      <!-- customer record start -->
-      <tr class="govuk-table__row govuk-!-font-size-16">
-        
-        <td class="govuk-table__cell">John Bates</td>
-  
-        <td class="govuk-table__cell" data-sort-value="6961">JF643564D</td>
-  
-        <td class="govuk-table__cell" data-sort-value="6961">92827339</td>
-  
-        <td class="govuk-table__cell">Tesco Stores Ltd,
-          26A Linden Avenue, Old Basing, RG24 7HG</td>
-  
-        <td class="govuk-table__cell" data-sort-value="1897">383764/93</td>
-  
-        <td class="govuk-table__cell" data-sort-value="1897">Crowns Jewellery, Coventry, CV1 3EE</td>
-  
-        <td class="govuk-table__cell" data-sort-value="1897">No previous employee number</td>
-  
-        <td class="govuk-table__cell" data-sort-value="1897">£89.67</td>
-  
-        <td class="govuk-table__cell " data-sort-value="1897"><ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
-          <li>£89.67 (Income Support)</li>
-        </ul></td>
-  
-      </tr>
-    <!-- customer record end -->
+    
 
      <!-- customer record start -->
      <tr class="govuk-table__row govuk-!-font-size-16">
         
-      <td class="govuk-table__cell">John Brown</td>
-
-      <td class="govuk-table__cell" data-sort-value="6961">FZ943564D</td>
-
-      <td class="govuk-table__cell" data-sort-value="6961">87827339</td>
-
-      <td class="govuk-table__cell">Tesco Stores Ltd,
-        26A Linden Avenue, Old Basing, RG24 7HG</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">No current employee number</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">No previous employer details</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">No previous employee number</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">£4,567.08</td>
-
-      <td class="govuk-table__cell " data-sort-value="1897"><ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
-        <li>£4,567.08 (UC Advance (Benefit Transfer))</li>
-      </ul></td>
-
-    </tr>
-  <!-- customer record end -->
-
-    <!-- customer record start -->
-    <tr class="govuk-table__row govuk-!-font-size-16">
-        
-      <td class="govuk-table__cell">John Brown</td>
-
-      <td class="govuk-table__cell" data-sort-value="6961">LP873565C</td>
-
-      <td class="govuk-table__cell" data-sort-value="6961">55753677</td>
-
-      <td class="govuk-table__cell">No current employer details</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">No current employee number</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">Tesco Stores Ltd,
-        26A Linden Avenue, Old Basing, RG24 7HG</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">No previous employee number</td>
-
-      <td class="govuk-table__cell" data-sort-value="1897">£18.95</td>
-
-      <td class="govuk-table__cell " data-sort-value="1897"><ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
-        <li>£18.95 (Universal Credit)</li>
-      </ul></td>
-
-    </tr>
-  <!-- customer record end -->
-
-     <!-- customer record start -->
-     <tr class="govuk-table__row govuk-!-font-size-16">
-        
-      <td class="govuk-table__cell">John Bruntwick</td>
+      <td class="govuk-table__cell">John Williams</td>
 
       <td class="govuk-table__cell" data-sort-value="6961">JT666776D</td>
 
@@ -586,7 +370,7 @@
    <!-- customer record start -->
    <tr class="govuk-table__row govuk-!-font-size-16">
         
-    <td class="govuk-table__cell">John Buck</td>
+    <td class="govuk-table__cell">John Williams</td>
 
     <td class="govuk-table__cell" data-sort-value="6961">RF88967D</td>
 
@@ -611,70 +395,12 @@
   </tr>
 <!-- customer record end -->
 
- <!-- customer record start -->
- <tr class="govuk-table__row govuk-!-font-size-16">
-        
-  <td class="govuk-table__cell">John Buckson</td>
-
-  <td class="govuk-table__cell" data-sort-value="6961">PZ773394D</td>
-
-  <td class="govuk-table__cell" data-sort-value="6961">90093984</td>
-
-  <td class="govuk-table__cell">Tesco Stores Ltd,
-    26A Linden Avenue, Old Basing, RG24 7HG</td>
-
-  <td class="govuk-table__cell" data-sort-value="1897">4567</td>
-
-  <td class="govuk-table__cell" data-sort-value="1897">No previous employer details</td>
-
-  <td class="govuk-table__cell" data-sort-value="1897">No previous employee number</td>
-
-  <td class="govuk-table__cell" data-sort-value="1897">£49.67</td>
-
-  <td class="govuk-table__cell " data-sort-value="1897"><ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
-    <li>£49.67 (Universal Credit)</li>
-  </ul></td>
-
-</tr>
-<!-- customer record end -->
 
           </tbody>
         </table>
         
 
 
-
-<!-- start pagination -->
-<nav class="govuk-pagination" aria-label="Pagination">
-  <ul class="govuk-pagination__list">
-    <li class="govuk-pagination__item govuk-pagination__item--current">
-      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1" aria-current="page">
-        1
-      </a>
-    </li>
-    <li class="govuk-pagination__item">
-      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2">
-        2
-      </a>
-    </li>
-    <li class="govuk-pagination__item">
-      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
-        3
-      </a>
-    </li>
-  </ul>
-  <div class="govuk-pagination__next">
-    <a class="govuk-link govuk-pagination__link" href="#" rel="next">
-      <span class="govuk-pagination__link-title">
-        Next<span class="govuk-visually-hidden"> page</span>
-      </span>
-      <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
-        <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
-      </svg>
-    </a>
-  </div>
-</nav>
-<!-- end pagination -->
       </div>
     </div>
 <!-- end filter - results -->
