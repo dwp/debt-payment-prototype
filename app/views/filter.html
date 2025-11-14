@@ -1,0 +1,360 @@
+{%- from "moj/components/filter/macro.njk" import mojFilter -%}
+{%- from "govuk/components/checkboxes/macro.njk" import govukCheckboxes -%}
+{%- from "govuk/components/input/macro.njk" import govukInput -%}
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Search results – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <form class="form" action="" method="post">
+
+    <h1 class="govuk-heading-xl">
+      Customer search results
+    </h1>
+
+<!-- start search criteria -->
+    <p class="govuk-body">Your search:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>Employer name: <span class="govuk-!-font-weight-bold">TESCO Stores Ltd</span></li>
+          <li>First name: <span class="govuk-!-font-weight-bold">John </span> </li> 
+        </ul>
+      </p>
+        
+      <p class="govuk-body">
+          <a href="javascript:window.history.back()" class="govuk-link">Change search</a>
+      </p>
+<!-- end search criteria -->
+
+        <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+<!--  filter - fields -->
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+        {%- set filterOptionsHtml %}
+
+          {#  First name        #}
+          {{ govukInput({
+            id: 'first-name',
+            name: 'firstName',
+            label: {
+              text: 'First name',
+              classes: 'govuk-label--s'
+            },
+            value: firstName
+          }) }}
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+          {#  Last name        #}
+          {{ govukInput({
+            id: 'surname',
+            name: 'surname',
+            label: {
+              text: 'Last name',
+              classes: 'govuk-label--s'
+            },
+            value: surname
+          }) }}
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+          {#  National Insurance number        #}
+          {{ govukInput({
+            id: 'ni-number',
+            name: 'niNumber',
+            label: {
+              text: 'National Insurance number',
+              classes: 'govuk-label--s'
+            },
+            value: niNumber
+          }) }}
+
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+          {#  Employer        #}
+          {{ govukInput({
+            id: 'employer',
+            name: 'employer',
+            label: {
+              text: 'Employer',
+              classes: 'govuk-label--s'
+            },
+            value: employer
+          }) }}
+
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+          {#  Postcode        #}
+          {{ govukInput({
+            id: 'postcode',
+            name: 'postcode',
+            label: {
+              text: 'Employer postcode',
+              classes: 'govuk-label--s'
+            },
+            value: postcode
+          }) }}       
+          
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+
+          {#  Staff number        #}
+          {{ govukInput({
+            id: 'staffNumber',
+            name: 'staffNumber',
+            label: {
+              text: 'Employee staff reference',
+              classes: 'govuk-label--s'
+            },
+            value: staffNumber
+          }) }}       
+          
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+
+            {#  Balance        #}
+          {{ govukInput({
+            id: 'balance',
+            name: 'balance',
+            label: {
+              text: 'Amount outstanding',
+              classes: 'govuk-label--s'
+            },
+            prefix: {
+              text: "£"
+            },
+            value: balance
+          }) }}
+
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+          {#  Balance        #}
+          {{ govukInput({
+            id: 'balance',
+            name: 'balance',
+            label: {
+              text: 'Individual balance',
+              classes: 'govuk-label--s'
+            },
+            prefix: {
+              text: "£"
+            },
+            value: indbalance
+          }) }}
+
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+          {#  Benefit type        #}
+          {{ govukInput({
+            id: 'benefit-type-id',
+            name: 'benefitTypeId',
+            label: {
+              text: 'Benefit type',
+              classes: 'govuk-label--s'
+            }
+          }) }}
+
+   
+
+          <!-- {#  DEA type       #}
+          {{ govukCheckboxes({
+            idPrefix: 'benefit-type-id',
+            name: 'benefitTypeId',
+            classes: "govuk-checkboxes--small",
+            fieldset: {
+              legend: {
+                text: '[Benefit type]',
+                classes: 'govuk-fieldset__legend--s'
+              }
+            },
+            items: benefitTypeIds
+          }) }} -->
+
+<!--  filter - fields -->
+
+ <!-- filter - apply filters button -->
+ <!-- <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+ {{ govukButton({
+            text: "Apply filters",
+            submit: {
+              attributes: {
+                "data-test-id": "submit-button"
+              }
+            },
+            selectedFilters: selectedFilters,
+            optionsHtml: filterOptionsHtml
+          }) }} -->
+ <!-- filter - apply filters button -->
+
+        {% endset -%}
+
+<!-- filter - selection -->
+        {{ mojFilter({
+          heading: {
+            text: 'Filter'
+          },
+          submit: {
+            attributes: {
+              "data-test-id": "submit-button"
+            }
+          },
+          selectedFilters: selectedFilters,
+          optionsHtml: filterOptionsHtml
+        }) }}
+<!-- filter - selection -->
+      </div>
+
+<!--  filter - results -->
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-m">
+          25 customer records
+        </h2>
+
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+        
+
+ <!-- start customer record -->
+
+<div class="govuk-summary-card ">
+
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      John Althorpe
+    </h2>
+  </div>
+
+  <div class="govuk-summary-card__content ">
+
+    <dl class="govuk-summary-list govuk-!-font-size-16">
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          National Insurance number
+        </dt>
+        <dd class="govuk-summary-list__value">
+          DF988876A
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Router account number
+        </dt>
+        <dd class="govuk-summary-list__value">
+          02938876
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Current employer
+        </dt>
+        <dd class="govuk-summary-list__value">
+          No current employer details
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Current employee staff reference
+        </dt>
+        <dd class="govuk-summary-list__value">
+          No current employee staff reference
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Previous employer
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Tesco Stores Ltd, <br>
+          26A Linden Avenue, Old Basing, RG24 7HG
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Previous employee staff reference
+        </dt>
+        <dd class="govuk-summary-list__value">
+          No previous employee staff reference
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Amount outstanding
+        </dt>
+        <dd class="govuk-summary-list__value">
+          £467.89
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Individual balance
+        </dt>
+        <dd class="govuk-summary-list__value ">
+          <ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
+            <li>£460 (Carers Allowance)</li>
+            <li>£7.89 (Sickness Benefit)</li>
+          </ul>
+        </dd>
+      </div>
+
+    </dl>
+
+  </div>
+</div>
+<!-- end customer record -->
+
+
+<!-- start pagination -->
+<nav class="govuk-pagination" aria-label="Pagination">
+  <ul class="govuk-pagination__list">
+    <li class="govuk-pagination__item govuk-pagination__item--current">
+      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1" aria-current="page">
+        1
+      </a>
+    </li>
+    <li class="govuk-pagination__item">
+      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2">
+        2
+      </a>
+    </li>
+    <li class="govuk-pagination__item">
+      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
+        3
+      </a>
+    </li>
+  </ul>
+  <div class="govuk-pagination__next">
+    <a class="govuk-link govuk-pagination__link" href="#" rel="next">
+      <span class="govuk-pagination__link-title">
+        Next<span class="govuk-visually-hidden"> page</span>
+      </span>
+      <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+        <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+      </svg>
+    </a>
+  </div>
+</nav>
+<!-- end pagination -->
+      </div>
+    </div>
+<!-- end filter - results -->
+
+
+
+  </form>
+
+{% endblock %}

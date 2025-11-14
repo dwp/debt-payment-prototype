@@ -1,0 +1,30 @@
+
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Account home – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+       
+        <h1 class="govuk-heading-xl">Account search</h1>
+
+
+              <h2 class="govuk-heading-m govuk-!-font-weight-bold">Search for a customer</h2>
+              <p class="govuk-body">You can use employer or customer information.</p>
+              <p class="govuk-body govuk-!-margin-bottom-0"><a href="/search-customer2" class="govuk-link">Start customer search</a></p>
+
+              <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+              <h2 class="govuk-heading-m">Search for a correspondent </h2>
+              <p class="govuk-body">This includes next of kin, solicitors and executors.</p>
+              <p class="govuk-body govuk-!-margin-bottom-0"><a href="/search-correspondent2" class="govuk-link">Start correspondent search</a></p>
+            </div>
+      </div>
+    </div>
+
+
+{% endblock %}
