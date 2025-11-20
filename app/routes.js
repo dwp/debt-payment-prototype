@@ -82,7 +82,7 @@ router.get('/filter', function(request, response) {
 
 router.post('/filter', function(request, response) {
   const body = request.body
-  response.redirect(filterService.buildUrlWithQueries('/filter', body))
+  // response.redirect(filterService.buildUrlWithQueries('/filter', body))
 })
 
 // Add your routes here
